@@ -10,4 +10,4 @@ atlassian-ide-plugin.xml
 build
 *.ipr
 *.iws
-.gradle
+/.gradle
