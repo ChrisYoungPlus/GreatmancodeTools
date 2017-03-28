@@ -17,8 +17,8 @@ ext."signing.keyId" = System.getenv("keyId")
 ext."signing.secretKeyRingFile" = System.getenv("secretKeyRingFile")
 ext."signing.password" = System.getenv("keyPassword")
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 if (ext.isReleaseVersion) {
