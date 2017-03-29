@@ -37,7 +37,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 
-@Plugin(id = "greatmancodetoolsloader", name = "greatmancodetoolsloader", version = "1.0")
+@Plugin(id = "greatmancodetoolsloader", name = "GreatmancodeToolsLoader", version = "1.0",
+    description = "An utility plugin", url = "https://github.com/Aztorius/GreatmancodeTools",
+    authors = {"greatman", "aztorius"})
 public class SpongeLoader implements Loader {
 
     @Getter
