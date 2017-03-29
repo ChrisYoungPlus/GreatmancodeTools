@@ -36,6 +36,8 @@ import org.spongepowered.api.text.format.TextColor;
 import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.text.format.TextStyle;
 import org.spongepowered.api.text.format.TextStyles;
+import org.spongepowered.api.world.Location;
+import org.spongepowered.api.world.World;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -73,7 +75,7 @@ public class SpongeServerCaller extends ServerCaller {
         TextColor color = null;
         TextStyle.Base style = null;
         while (m.find()) {
-            
+
             String entry = m.group();
             if (entry.contains("{{")) {
                 color = null;
@@ -205,7 +207,7 @@ public class SpongeServerCaller extends ServerCaller {
             }
 
             @Override
-            public List<String> getSuggestions(CommandSource source, String arguments) throws CommandException {
+            public List<String> getSuggestions(CommandSource source, String arguments, Location<World> targetPosition) throws CommandException {
                 List<String> list = new ArrayList<>();
                 list.addAll(subCommand.getSubCommandKeys());
                 return list;
@@ -217,12 +219,12 @@ public class SpongeServerCaller extends ServerCaller {
             }
 
             @Override
-            public java.util.Optional<? extends Text> getShortDescription(CommandSource source) {
+            public java.util.Optional<Text> getShortDescription(CommandSource source) {
                 return Optional.empty();
             }
 
             @Override
-            public java.util.Optional<? extends Text> getHelp(CommandSource source) {
+            public java.util.Optional<Text> getHelp(CommandSource source) {
                 return Optional.empty();
             }
 
