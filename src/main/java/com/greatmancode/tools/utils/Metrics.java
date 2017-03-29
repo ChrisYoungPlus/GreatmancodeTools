@@ -145,7 +145,7 @@ public class Metrics {
     /**
      * Get the full server version
      *
-     * @return
+     * @return Server version
      */
     public String getFullServerVersion() {
         return caller.getServerVersion();
@@ -154,7 +154,7 @@ public class Metrics {
     /**
      * Get the amount of players online
      *
-     * @return
+     * @return Amount of online players
      */
     public int getPlayersOnline() {
         return caller.getPlayerCaller().getOnlinePlayers().size();
