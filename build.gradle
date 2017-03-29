@@ -98,6 +98,9 @@ artifacts {
     archives javadocJar, sourcesJar
 }
 
+compileJava {
+    options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+}
 
 uploadArchives {
     repositories {
