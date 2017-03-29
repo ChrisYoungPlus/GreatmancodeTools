@@ -89,6 +89,8 @@ public class SpongeLoader implements Loader {
             serverCaller.getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
         } catch (IllegalAccessException e) {
             serverCaller.getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            serverCaller.getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
         }
     }
 
