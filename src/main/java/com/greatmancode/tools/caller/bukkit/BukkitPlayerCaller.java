@@ -33,6 +33,7 @@ public class BukkitPlayerCaller extends PlayerCaller {
         super(caller);
     }
 
+    @Deprecated
     @Override
     public boolean checkPermission(String playerName, String perm) {
         boolean result;
@@ -46,6 +47,7 @@ public class BukkitPlayerCaller extends PlayerCaller {
         return result;
     }
 
+    @Deprecated
     @Override
     public void sendMessage(String playerName, String message) {
         Player p = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayerExact(playerName);
@@ -56,6 +58,7 @@ public class BukkitPlayerCaller extends PlayerCaller {
         }
     }
 
+    @Deprecated
     @Override
     public String getPlayerWorld(String playerName) {
         Player p = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayerExact(playerName);
@@ -68,6 +71,7 @@ public class BukkitPlayerCaller extends PlayerCaller {
         return (p != null) ? p.getWorld().getName() : "";
     }
 
+    @Deprecated
     @Override
     public boolean isOnline(String playerName) {
         return ((BukkitLoader) getCaller().getLoader()).getServer().getPlayerExact(playerName) != null;
@@ -82,11 +86,13 @@ public class BukkitPlayerCaller extends PlayerCaller {
         return list;
     }
 
+    @Deprecated
     @Override
     public boolean isOp(String playerName) {
         return ((BukkitLoader) getCaller().getLoader()).getServer().getOfflinePlayer(playerName).isOp();
     }
 
+    @Deprecated
     @Override
     public UUID getUUID(String playerName) {
         return Bukkit.getOfflinePlayer(playerName).getUniqueId();
