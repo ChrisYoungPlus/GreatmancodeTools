@@ -54,6 +54,7 @@ import java.util.Map;
 public class BukkitConfig extends Config {
     private final YamlConfiguration configFile;
 
+    @Deprecated
     public BukkitConfig(InputStream is, ServerCaller serverCaller) {
         super(is, serverCaller);
         configFile = YamlConfiguration.loadConfiguration(is);

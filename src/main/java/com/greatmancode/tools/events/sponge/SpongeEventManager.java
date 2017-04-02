@@ -19,7 +19,7 @@
 package com.greatmancode.tools.events.sponge;
 
 import com.greatmancode.tools.events.interfaces.ServerEventManager;
-import com.greatmancode.tools.events.playerEvent.PlayerJoinEvent;
+import com.greatmancode.tools.events.playerevent.PlayerJoinEvent;
 import com.greatmancode.tools.interfaces.BukkitLoader;
 import com.greatmancode.tools.interfaces.SpongeLoader;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
