@@ -49,7 +49,7 @@ dependencies {
     provided group: 'org.spongepowered', name: 'spongeapi', version: '5.1.0'
     provided group: 'net.milkbowl.vault', name: 'VaultAPI', version: '1.6'
     provided group: 'be.maximvdw', name: 'MVdWPlaceholderAPI', version: '1.0.2-SNAPSHOT'
-    testCompile group: 'junit', name: 'junit', version: '4.10'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
 buildscript {
