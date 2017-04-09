@@ -46,7 +46,7 @@ repositories {
 dependencies {
     provided group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     provided group: 'org.bukkit', name: 'bukkit', version: '1.8.8-R0.1-SNAPSHOT'
-    provided group: 'org.projectlombok', name: 'lombok', version: '1.16.12'
+    provided group: 'org.projectlombok', name: 'lombok', version: '1.16.16'
     provided group: 'org.spongepowered', name: 'spongeapi', version: '5.1.0'
     provided group: 'net.milkbowl.vault', name: 'VaultAPI', version: '1.6'
     provided group: 'be.maximvdw', name: 'MVdWPlaceholderAPI', version: '1.0.2-SNAPSHOT'
@@ -57,9 +57,10 @@ buildscript {
     repositories {
         jcenter()
         maven { url 'http://repo.spring.io/plugins-release/' }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
+        classpath 'gradle.plugin.nl.javadude.gradle.plugins:license-gradle-plugin:0.12.1'
         classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7'
     }
 }
