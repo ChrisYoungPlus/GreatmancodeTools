@@ -40,6 +40,7 @@ repositories {
     maven { url "https://libraries.minecraft.net" }
     maven { url "http://repo.spongepowered.org/maven" }
     maven { url "http://repo.mvdw-software.be/content/groups/public/"}
+    maven { url "http://nexus.hc.to/content/repositories/pub_releases"}
 }
 
 dependencies {
