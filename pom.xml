@@ -80,6 +80,16 @@
 			<artifactId>Vault</artifactId>
 			<version>1.6.6</version>
 			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.bukkit</groupId>
+					<artifactId>bukkit</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.bukkit</groupId>
+					<artifactId>craftbukkit</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>be.maximvdw</groupId>
@@ -122,8 +132,6 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
-					<showWarnings>true</showWarnings>
-					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>
 			<plugin>
