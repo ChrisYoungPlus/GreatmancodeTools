@@ -86,6 +86,11 @@ public class SpongePlayerCaller extends PlayerCaller {
     }
 
     @Override
+    public boolean isOP(UUID uuid) {
+        return false;
+    }
+
+    @Override
     public UUID getUUID(String playerName) {
         return loader.getGame().getServer().getPlayer(playerName).get().getUniqueId();
     }
