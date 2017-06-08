@@ -82,12 +82,16 @@ public abstract class PlayerCaller {
      * @param playerName The player name to check
      * @return True if the player is a OP else false.
      */
+    @Deprecated
     public abstract boolean isOp(String playerName);
 
+
+    public abstract boolean isOP(UUID uuid);
     /**
      * Retrieve the UUID of a player.
      * @param playerName The player name
      * @return The UUID of the player
      */
+    @Deprecated
     public abstract UUID getUUID(String playerName);
 }

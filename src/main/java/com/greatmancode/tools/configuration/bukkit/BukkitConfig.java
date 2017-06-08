@@ -44,6 +44,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +57,8 @@ public class BukkitConfig extends Config {
 
     public BukkitConfig(InputStream is, ServerCaller serverCaller) {
         super(is, serverCaller);
-        configFile = YamlConfiguration.loadConfiguration(is);
+        InputStreamReader reader = new InputStreamReader(is);
+        configFile = YamlConfiguration.loadConfiguration(reader);
     }
 
     public BukkitConfig(File folder, String fileName, ServerCaller serverCaller) {

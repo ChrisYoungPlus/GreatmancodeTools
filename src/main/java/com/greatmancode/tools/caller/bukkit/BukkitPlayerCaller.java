@@ -83,11 +83,18 @@ public class BukkitPlayerCaller extends PlayerCaller {
     }
 
     @Override
+    @Deprecated
     public boolean isOp(String playerName) {
         return ((BukkitLoader) getCaller().getLoader()).getServer().getOfflinePlayer(playerName).isOp();
     }
 
     @Override
+    public boolean isOP(UUID uuid) {
+        return ((BukkitLoader) getCaller().getLoader()).getServer().getOfflinePlayer(uuid).isOp();
+    }
+
+    @Override
+    @Deprecated
     public UUID getUUID(String playerName) {
         return Bukkit.getOfflinePlayer(playerName).getUniqueId();
     }

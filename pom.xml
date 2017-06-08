@@ -6,7 +6,7 @@
 
 	<groupId>com.greatmancode</groupId>
 	<artifactId>tools</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.4-SNAPSHOT</version>
 	<name>GreatmancodeTools</name>
 	<inceptionYear>2013</inceptionYear>
 	<url>https://github.com/greatman/GreatmancodeTools</url>
@@ -14,12 +14,10 @@
 
 	<!-- Source code -->
 	<scm>
-		<developerConnection>scm:git:git@github.com:greatman/GreatmancodeTools.git</developerConnection>
-		<connection>scm:git:git://github.com/greatman/GreatmancodeTools.git</connection>
-		<url>hhttps://github.com/greatman/GreatmancodeTools</url>
+		<developerConnection>scm:git:git@github.com:addstarmc/GreatmancodeTools.git</developerConnection>
+		<connection>scm:git:git://github.com/addstarmc/GreatmancodeTools.git</connection>
+		<url>https://github.com/addstarmc/GreatmancodeTools</url>
 	</scm>
-
-
 	<!-- Organization -->
 	<organization>
 		<name>Greatman</name>
@@ -28,74 +26,81 @@
 	<!-- Continuous integration -->
 	<ciManagement>
 		<system>jenkins</system>
-		<url>http://jenkins.thebigdigmc.info/job/Craftconomy3</url>
+		<url>http://jenkins.addstarmc.com</url>
 	</ciManagement>
-
 	<properties>
+		<build.number />
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<bukkitVersion>1.7.9-R0.2</bukkitVersion>
 	</properties>
-
 	<repositories>
 		<repository>
-			<id>bukkit-repo</id>
-			<url>http://repo.bukkit.org/content/groups/public/</url>
+			<id>spigot-repo</id>
+			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
 		</repository>
 		<repository>
-			<id>Me</id>
-			<url>http://repo.greatmancode.com/content/groups/public/</url>
+			<id>addstar-repo</id>
+			<url>http://maven.addstar.com.au/artifactory/ext-release-local</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
 		</repository>
 		<repository>
-			<id>CanaryLib-repo</id>
-			<url>http://repo.visualillusionsent.net/repository/public/</url>
+			<id>addstar-snapshot-repo</id>
+			<url>http://maven.addstar.com.au/artifactory/ext-snapshot-local</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
 		</repository>
-        <repository>
-            <id>canaryutil-repo</id>
-            <url>http://repo.larry1123.net/content/groups/public/</url>
-        </repository>
+		<repository>
+			<id>sponge</id>
+			<url>http://repo.spongepowered.org/maven</url>
+		</repository>
+		<repository>
+			<id>max</id>
+			<url>http://repo.mvdw-software.be/content/groups/public/</url>
+		</repository>
+		<repository>
+			<id>vault-repo</id>
+			<name>Public Releases</name>
+			<url>http://nexus.hc.to/content/repositories/pub_releases/</url>
+		</repository>
 	</repositories>
-
-	<distributionManagement>
-		<repository>
-			<id>upstream</id>
-			<name>greatmancode-releases</name>
-			<url>http://repo.greatmancode.com/content/repositories/releases</url>
-		</repository>
-		<snapshotRepository>
-			<id>upstream</id>
-			<name>greatmancode-snapshots</name>
-			<url>http://repo.greatmancode.com/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
-
 	<dependencies>
 		<dependency>
-			<groupId>org.bukkit</groupId>
-			<artifactId>bukkit</artifactId>
-			<version>${bukkitVersion}</version>
-			<type>jar</type>
+			<groupId>org.spigotmc</groupId>
+			<artifactId>spigot-api  </artifactId>
+			<version>1.12-pre6-SNAPSHOT</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.milkbowl.vault</groupId>
+			<artifactId>Vault</artifactId>
+			<version>1.6.6</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>be.maximvdw</groupId>
+			<artifactId>MVdWPlaceholderAPI</artifactId>
+			<version>1.0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.spongepowered</groupId>
+			<artifactId>spongeapi</artifactId>
+			<version>3.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.10</version>
+			<version>4.12</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.canarymod</groupId>
-			<artifactId>CanaryLib</artifactId>
-			<version>1.0-RC-4-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>net.larry1123</groupId>
-			<artifactId>CanaryUtil</artifactId>
-			<version>0.3.4-SNAPSHOT</version>
 		</dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.12.6</version>
+            <version>1.16.12</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -108,18 +113,6 @@
 	</dependencies>
 
 	<build>
-		<defaultGoal>clean install</defaultGoal>
-		<resources>
-			<resource>
-				<targetPath>.</targetPath>
-				<filtering>true</filtering>
-				<directory>${basedir}/src/main/resources</directory>
-				<includes>
-					<include>*.yml</include>
-					<include>*.info</include>
-				</includes>
-			</resource>
-		</resources>
 		<plugins>
 			<!-- Compiler plugin -->
 			<plugin>
@@ -127,8 +120,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.4</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 					<compilerArguments>
 						<O>-Xlint:all</O>
 						<O>-Xlint:-path</O>
@@ -140,6 +133,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -160,44 +154,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>com.mycila.maven-license-plugin</groupId>
-				<artifactId>maven-license-plugin</artifactId>
-				<version>1.10.b1</version>
-				<executions>
-					<execution>
-						<phase>clean</phase>
-						<goals>
-							<goal>format</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<quiet>false</quiet>
-					<encoding>UTF-8</encoding>
-					<strictCheck>true</strictCheck>
-					<header>${basedir}/HEADER.txt</header>
-					<keywords>
-						<keyword>${project.name}</keyword>
-						<keyword>license</keyword>
-					</keywords>
-					<mapping>
-						<java>SLASHSTAR_STYLE</java>
-					</mapping>
-					<properties>
-						<name>${project.name}</name>
-						<url>${project.organization.url}</url>
-						<copyright>Copyright (c) ${project.inceptionYear}-2014, ${project.organization.name}</copyright>
-					</properties>
-					<includes>
-						<include>src/main/java/**</include>
-						<include>src/test/java/**</include>
-					</includes>
-					<excludes>
-						<exclude>src/main/java/com/greatmancode/utils/Metrics.java</exclude>
-					</excludes>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

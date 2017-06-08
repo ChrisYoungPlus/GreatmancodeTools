@@ -116,7 +116,7 @@ public abstract class ServerCaller {
      *
      * @param name    The name of the command
      * @param help    The help line of the command
-     * @param manager The manager that manage the command.
+     * @param command The command.
      */
     public abstract void addCommand(String name, String help, SubCommand command);
 
