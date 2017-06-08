@@ -122,10 +122,6 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
-					<compilerArguments>
-						<O>-Xlint:all</O>
-						<O>-Xlint:-path</O>
-					</compilerArguments>
 					<showWarnings>true</showWarnings>
 					<showDeprecation>true</showDeprecation>
 				</configuration>
@@ -154,6 +150,9 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<additionalparam>-Xdoclint:none</additionalparam>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -57,8 +57,14 @@ public class UnitTestPlayerCaller extends PlayerCaller {
     }
 
     @Override
+    @Deprecated
     public boolean isOp(String playerName) {
         return playerName.equals("UnitTestPlayer");
+    }
+
+    @Override
+    public boolean isOP(UUID uuid) {
+        return true ;
     }
 
     @Override
