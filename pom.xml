@@ -32,6 +32,18 @@
 		<build.number />
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	<distributionManagement>
+		<repository>
+			<id>addstarmc-release</id>
+			<name>maven.addstar.com.au-releases</name>
+			<url>http://maven.addstar.com.au/artifactory/ext-release-local</url>
+		</repository>
+		<snapshotRepository>
+			<id>addstarmc-snapshot</id>
+			<name>maven.addstar.com.au-snapshots</name>
+			<url>http://maven.addstar.com.au/artifactory/ext-snapshot-local</url>
+		</snapshotRepository>
+	</distributionManagement>
 	<repositories>
 		<repository>
 			<id>spigot-repo</id>
@@ -95,11 +107,22 @@
 			<groupId>be.maximvdw</groupId>
 			<artifactId>MVdWPlaceholderAPI</artifactId>
 			<version>1.0.2-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.bukkit</groupId>
+					<artifactId>bukkit</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.bukkit</groupId>
+					<artifactId>craftbukkit</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.spongepowered</groupId>
 			<artifactId>spongeapi</artifactId>
 			<version>3.0.0</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -113,15 +136,7 @@
             <version>1.16.12</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<!-- Compiler plugin -->
