@@ -50,7 +50,7 @@ public class SpongePlayerCaller extends PlayerCaller {
     @Override
     public void sendMessage(String playerName, String message) {
         if (playerName.equals("console")) {
-            caller.getLogger().info(message);
+            loader.getGame().getServer().getConsole().sendMessage(((SpongeServerCaller)getCaller()).addColorSponge(message));
             return;
         }
         loader.getGame().getServer().getPlayer(playerName).get().sendMessage(((SpongeServerCaller)getCaller()).addColorSponge(message));

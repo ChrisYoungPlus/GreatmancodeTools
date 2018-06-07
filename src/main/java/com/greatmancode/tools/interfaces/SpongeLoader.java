@@ -37,7 +37,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 
-@Plugin(id = "GreatmancodeToolsLoader", name = "GreatmancodeToolsLoader", version = "1.0")
+@Plugin(id = "greatmancodetoolsloader", name = "GreatmancodeToolsLoader", version = "1.0",
+    description = "An utility plugin", url = "https://github.com/Aztorius/GreatmancodeTools",
+    authors = {"greatman", "aztorius"})
 public class SpongeLoader implements Loader {
 
     @Getter
@@ -86,6 +88,8 @@ public class SpongeLoader implements Loader {
         } catch (InstantiationException e) {
             serverCaller.getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
         } catch (IllegalAccessException e) {
+            serverCaller.getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
+        } catch (ArrayIndexOutOfBoundsException e) {
             serverCaller.getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
         }
     }

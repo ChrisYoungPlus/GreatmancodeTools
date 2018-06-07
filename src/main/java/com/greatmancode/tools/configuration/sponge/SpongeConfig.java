@@ -25,7 +25,7 @@ import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,8 +35,9 @@ public class SpongeConfig extends Config {
 
     private CommentedConfigurationNode file;
     private HoconConfigurationLoader loader;
-    public SpongeConfig(InputStream is, ServerCaller serverCaller) {
-        super(is, serverCaller);
+
+    public SpongeConfig(InputStreamReader re, ServerCaller serverCaller) {
+        super(re, serverCaller);
         //No can't do.
     }
 

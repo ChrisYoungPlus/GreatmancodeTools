@@ -16,24 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with GreatmancodeTools.  If not, see <http://www.gnu.org/licenses/>.
  */
-/*
- * This file is part of Craftconomy3.
- *
- * Copyright (c) 2011-2013, Greatman <http://github.com/greatman/>
- *
- * Craftconomy3 is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Craftconomy3 is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Craftconomy3.  If not, see <http://www.gnu.org/licenses/>.
- */
+
 package com.greatmancode.tools.configuration.bukkit;
 
 import com.greatmancode.tools.configuration.Config;
@@ -43,7 +26,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
@@ -55,10 +37,9 @@ import java.util.Map;
 public class BukkitConfig extends Config {
     private final YamlConfiguration configFile;
 
-    public BukkitConfig(InputStream is, ServerCaller serverCaller) {
-        super(is, serverCaller);
-        InputStreamReader reader = new InputStreamReader(is);
-        configFile = YamlConfiguration.loadConfiguration(reader);
+    public BukkitConfig(InputStreamReader re, ServerCaller serverCaller) {
+        super(re, serverCaller);
+        configFile = YamlConfiguration.loadConfiguration(re);
     }
 
     public BukkitConfig(File folder, String fileName, ServerCaller serverCaller) {

@@ -28,6 +28,7 @@ import lombok.Setter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Level;
+import java.io.InputStreamReader;
 
 public class BukkitLoader extends JavaPlugin implements Loader {
     private Common common;
@@ -40,7 +41,8 @@ public class BukkitLoader extends JavaPlugin implements Loader {
     public void onEnable() {
         BukkitServerCaller bukkitCaller = new BukkitServerCaller(this);
         eventManager = new EventManager(bukkitCaller);
-        BukkitConfig bukkitConfig = new BukkitConfig(this.getClass().getResourceAsStream("/loader.yml"), bukkitCaller);
+        InputStreamReader readerLoader = new InputStreamReader(this.getClass().getResourceAsStream("/loader.yml"));
+        BukkitConfig bukkitConfig = new BukkitConfig(readerLoader, bukkitCaller);
         String mainClass = bukkitConfig.getString("main-class");
         try {
             Class<?> clazz = Class.forName(mainClass);

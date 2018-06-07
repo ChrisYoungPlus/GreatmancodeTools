@@ -29,28 +29,33 @@ import java.util.List;
 
 public abstract class VaultEconomy implements Economy {
 
+    @Deprecated
+    @Override
     public boolean hasAccount(String s) {
         return false;
     }
 
+    @Override
     public boolean hasAccount(OfflinePlayer offlinePlayer) {
         return hasAccount(new Player(offlinePlayer.getName(), null, null, offlinePlayer.getUniqueId()));
     }
 
     @Deprecated
+    @Override
     public boolean hasAccount(String playerName, String worldName) {
 
         return hasAccount(Bukkit.getOfflinePlayer(playerName));
     }
 
+    @Override
     public boolean hasAccount(OfflinePlayer offlinePlayer, String world) {
         return hasAccount(offlinePlayer);
     }
 
     public abstract boolean hasAccount(Player player);
 
-    @Override
     @Deprecated
+    @Override
     public double getBalance(String playerName) {
         return getBalance(Bukkit.getOfflinePlayer(playerName));
     }
@@ -60,8 +65,8 @@ public abstract class VaultEconomy implements Economy {
         return getBalance(offlinePlayer, null);
     }
 
-    @Override
     @Deprecated
+    @Override
     public double getBalance(String playerName, String world) {
         return getBalance(Bukkit.getOfflinePlayer(playerName), world);
     }
@@ -73,6 +78,7 @@ public abstract class VaultEconomy implements Economy {
 
     public abstract double getBalance(Player player, String world);
 
+    @Deprecated
     @Override
     public boolean has(String playerName, double amount) {
         return has(Bukkit.getOfflinePlayer(playerName), amount);
@@ -83,6 +89,7 @@ public abstract class VaultEconomy implements Economy {
         return has(offlinePlayer, null, amount);
     }
 
+    @Deprecated
     @Override
     public boolean has(String playerName, String world, double amount) {
         return has(Bukkit.getPlayer(playerName), world, amount);
@@ -95,8 +102,8 @@ public abstract class VaultEconomy implements Economy {
 
     public abstract boolean has(Player player, String world, double amount);
 
-    @Override
     @Deprecated
+    @Override
     public EconomyResponse withdrawPlayer(String playerName, double amount) {
         return withdrawPlayer(Bukkit.getOfflinePlayer(playerName), amount);
     }
@@ -106,6 +113,7 @@ public abstract class VaultEconomy implements Economy {
         return withdrawPlayer(offlinePlayer, null, amount);
     }
 
+    @Deprecated
     @Override
     public EconomyResponse withdrawPlayer(String playerName, String world, double amount) {
         return withdrawPlayer(Bukkit.getOfflinePlayer(playerName), world, amount);
@@ -118,8 +126,8 @@ public abstract class VaultEconomy implements Economy {
 
     public abstract EconomyResponse withdrawPlayer(Player p, String world, double amount);
 
-    @Override
     @Deprecated
+    @Override
     public EconomyResponse depositPlayer(String playerName, double amount) {
         return depositPlayer(Bukkit.getOfflinePlayer(playerName), amount);
     }
@@ -129,8 +137,8 @@ public abstract class VaultEconomy implements Economy {
         return depositPlayer(offlinePlayer, null, amount);
     }
 
-    @Override
     @Deprecated
+    @Override
     public EconomyResponse depositPlayer(String playerName, String world, double amount) {
         return depositPlayer(Bukkit.getOfflinePlayer(playerName), world, amount);
     }
@@ -142,8 +150,8 @@ public abstract class VaultEconomy implements Economy {
 
     public abstract EconomyResponse depositPlayer(Player player, String world, double amount);
 
-    @Override
     @Deprecated
+    @Override
     public EconomyResponse createBank(String name, String playerName) {
         return createBank(name, Bukkit.getOfflinePlayer(playerName));
     }
@@ -155,8 +163,8 @@ public abstract class VaultEconomy implements Economy {
 
     public abstract EconomyResponse createBank(String name, Player player);
 
-    @Override
     @Deprecated
+    @Override
     public EconomyResponse isBankOwner(String name, String playerName) {
         return isBankOwner(name, Bukkit.getOfflinePlayer(playerName));
     }
@@ -168,8 +176,8 @@ public abstract class VaultEconomy implements Economy {
 
     public abstract EconomyResponse isBankOwner(String name, Player player);
 
-    @Override
     @Deprecated
+    @Override
     public EconomyResponse isBankMember(String name, String playerName) {
         return isBankMember(name, Bukkit.getOfflinePlayer(playerName));
     }
@@ -181,8 +189,8 @@ public abstract class VaultEconomy implements Economy {
 
     public abstract EconomyResponse isBankMember(String name, Player player);
 
-    @Override
     @Deprecated
+    @Override
     public boolean createPlayerAccount(String playerName) {
         return createPlayerAccount(Bukkit.getOfflinePlayer(playerName));
     }
@@ -194,14 +202,14 @@ public abstract class VaultEconomy implements Economy {
 
     public abstract boolean createPlayerAccount(Player player);
 
-    @Override
     @Deprecated
+    @Override
     public boolean createPlayerAccount(String playerName, String world) {
         return createPlayerAccount(Bukkit.getOfflinePlayer(playerName));
     }
-
-    @Override
+    
     @Deprecated
+    @Override
     public boolean createPlayerAccount(OfflinePlayer offlinePlayer, String world) {
         return createPlayerAccount(offlinePlayer);
     }
