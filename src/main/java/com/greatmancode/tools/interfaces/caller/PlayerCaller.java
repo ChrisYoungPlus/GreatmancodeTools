@@ -18,6 +18,8 @@
  */
 package com.greatmancode.tools.interfaces.caller;
 
+import com.greatmancode.tools.entities.Player;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -39,25 +41,49 @@ public abstract class PlayerCaller {
      * @param perm       The permission node to check
      * @return True if the player have the permission. Else false (Always true for the Console)
      */
+    @Deprecated
     public abstract boolean checkPermission(String playerName, String perm);
-
+    /**
+     * Check the permissions of a player
+     *
+     * @param uuid The player UUID name to check
+     * @param perm       The permission node to check
+     * @return True if the player have the permission. Else false (Always true for the Console)
+     */
+    
+    public abstract boolean checkPermission(UUID uuid, String perm);
     /**
      * Sends a message to a player
      *
      * @param playerName The player name to send the message
      * @param message    The message to send
      */
+    @Deprecated
     public abstract void sendMessage(String playerName, String message);
-
+    /**
+     * Sends a message to a player
+     *
+     * @param uuid The player uuid to send the message
+     * @param message    The message to send
+     */
+    
+    public abstract void sendMessage(UUID uuid, String message);
+    
     /**
      * Retrieve the world name that a player is currently in
      *
      * @param playerName The player name to retrieve the world
      * @return The world name the player is currently in. Returns "" when the player is offline
      */
+    @Deprecated
     public abstract String getPlayerWorld(String playerName);
-
-
+    
+    /**
+     * Retrieve the world name that a player is currently in
+     *
+     * @param uuid The player uuid to retrieve the world
+     * @return The world name the player is currently in. Returns "" when the player is offline
+     */
     public abstract String getPlayerWorld(UUID uuid);
 
 
@@ -67,14 +93,32 @@ public abstract class PlayerCaller {
      * @param playerName The player name
      * @return True if the player is online. Else false.
      */
+    @Deprecated
     public abstract boolean isOnline(String playerName);
+    
+    
+    /**
+     * Checks if a player is online
+     *
+     * @param uuid The player name
+     * @return True if the player is online. Else false.
+     */
+    public abstract boolean isOnline(UUID uuid);
 
     /**
      * Retrieve a list of online players
      *
      * @return A list of all players online.
      */
+    @Deprecated
     public abstract List<String> getOnlinePlayers();
+    
+    /**
+     * Retrieve a list of online players
+     *
+     * @return A list of all players online.
+     */
+    public abstract List<UUID> getUUIDsOnlinePlayers();
 
     /**
      * Check if the user is a Operator.
@@ -84,7 +128,12 @@ public abstract class PlayerCaller {
      */
     @Deprecated
     public abstract boolean isOp(String playerName);
-
+    /**
+     * Check if the user is a Operator.
+     *
+     * @param uuid The player uuid to check
+     * @return True if the player is a OP else false.
+     */
 
     public abstract boolean isOP(UUID uuid);
     /**
@@ -94,4 +143,19 @@ public abstract class PlayerCaller {
      */
     @Deprecated
     public abstract UUID getUUID(String playerName);
+    
+    /**
+     * Return the player name for a specific uuid
+     *
+     * @param uuid
+     * @return
+     */
+    public abstract String getPlayerName(UUID uuid);
+    
+    /**
+     *
+     * @param uuid the uuid to check
+     * @return @{code Player} Player object
+     */
+    public abstract Player getPlayer(UUID uuid);
 }

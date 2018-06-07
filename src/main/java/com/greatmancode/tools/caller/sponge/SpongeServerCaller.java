@@ -18,7 +18,11 @@
  */
 package com.greatmancode.tools.caller.sponge;
 
+import com.greatmancode.tools.commands.CommandSender;
+import com.greatmancode.tools.commands.ConsoleCommandSender;
+import com.greatmancode.tools.commands.PlayerCommandSender;
 import com.greatmancode.tools.commands.SubCommand;
+import com.greatmancode.tools.entities.Player;
 import com.greatmancode.tools.events.Event;
 import com.greatmancode.tools.interfaces.Common;
 import com.greatmancode.tools.interfaces.SpongeLoader;
@@ -36,8 +40,6 @@ import org.spongepowered.api.text.format.TextColor;
 import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.text.format.TextStyle;
 import org.spongepowered.api.text.format.TextStyles;
-import org.spongepowered.api.world.Location;
-import org.spongepowered.api.world.World;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -75,7 +77,7 @@ public class SpongeServerCaller extends ServerCaller {
         TextColor color = null;
         TextStyle.Base style = null;
         while (m.find()) {
-
+            
             String entry = m.group();
             if (entry.contains("{{")) {
                 color = null;
@@ -198,16 +200,22 @@ public class SpongeServerCaller extends ServerCaller {
                     subCommandValue = args[0];
                     System.arraycopy(args, 1, newArgs, 0, args.length - 1);
                 }
-                String username = source.getName();
+                CommandSender sender = null;
                 if (source instanceof ConsoleSource) {
-                    username = "console";
+                    sender = new ConsoleCommandSender();
+                }else if(source instanceof Player){
+                    sender = new PlayerCommandSender(((Player) source).getDisplayName(),((Player) source).getUuid());
                 }
-                subCommand.execute(subCommandValue, username, newArgs);
+                if(sender != null) {
+                    subCommand.execute(subCommandValue, sender, newArgs);
+                }else{
+                    return CommandResult.empty();
+                }
                 return CommandResult.success();
             }
 
             @Override
-            public List<String> getSuggestions(CommandSource source, String arguments, Location<World> targetPosition) throws CommandException {
+            public List<String> getSuggestions(CommandSource source, String arguments) throws CommandException {
                 List<String> list = new ArrayList<>();
                 list.addAll(subCommand.getSubCommandKeys());
                 return list;
@@ -219,12 +227,12 @@ public class SpongeServerCaller extends ServerCaller {
             }
 
             @Override
-            public java.util.Optional<Text> getShortDescription(CommandSource source) {
+            public java.util.Optional<? extends Text> getShortDescription(CommandSource source) {
                 return Optional.empty();
             }
 
             @Override
-            public java.util.Optional<Text> getHelp(CommandSource source) {
+            public java.util.Optional<? extends Text> getHelp(CommandSource source) {
                 return Optional.empty();
             }
 

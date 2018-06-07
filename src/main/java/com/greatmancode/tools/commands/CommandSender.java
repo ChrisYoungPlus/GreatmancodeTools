@@ -19,4 +19,6 @@
 package com.greatmancode.tools.commands;
 
 public interface CommandSender {
+
+    public String getName();
 }

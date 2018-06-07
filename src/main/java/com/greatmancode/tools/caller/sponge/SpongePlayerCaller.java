@@ -26,6 +26,7 @@ import org.spongepowered.api.service.permission.PermissionService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class SpongePlayerCaller extends PlayerCaller {
@@ -44,16 +45,26 @@ public class SpongePlayerCaller extends PlayerCaller {
             return true;
         }
         UUID uuid = getUUID(playerName);
+        return checkPermission(uuid, perm);
+    }
+
+    @Override
+    public boolean checkPermission(UUID uuid, String perm) {
         return loader.getGame().getServiceManager().provide(PermissionService.class).get().getUserSubjects().get(uuid.toString()).hasPermission(perm);
     }
 
     @Override
     public void sendMessage(String playerName, String message) {
         if (playerName.equals("console")) {
-            loader.getGame().getServer().getConsole().sendMessage(((SpongeServerCaller)getCaller()).addColorSponge(message));
+            caller.getLogger().info(message);
             return;
         }
         loader.getGame().getServer().getPlayer(playerName).get().sendMessage(((SpongeServerCaller)getCaller()).addColorSponge(message));
+    }
+
+    @Override
+    public void sendMessage(UUID uuid, String message) {
+        loader.getGame().getServer().getPlayer(uuid).get().sendMessage(((SpongeServerCaller)getCaller()).addColorSponge(message));
     }
 
     @Override
@@ -72,12 +83,22 @@ public class SpongePlayerCaller extends PlayerCaller {
     }
 
     @Override
+    public boolean isOnline(UUID uuid) {
+        return false;
+    }
+
+    @Override
     public List<String> getOnlinePlayers() {
         List<String> playerList = new ArrayList<>();
         for (Player p : loader.getGame().getServer().getOnlinePlayers()) {
             playerList.add(p.getName());
         }
         return playerList;
+    }
+
+    @Override
+    public List<UUID> getUUIDsOnlinePlayers() {
+        return null;
     }
 
     @Override
@@ -93,5 +114,16 @@ public class SpongePlayerCaller extends PlayerCaller {
     @Override
     public UUID getUUID(String playerName) {
         return loader.getGame().getServer().getPlayer(playerName).get().getUniqueId();
+    }
+
+    @Override
+    public String getPlayerName(UUID uuid) {
+        return null;
+    }
+
+    @Override
+    public com.greatmancode.tools.entities.Player getPlayer(UUID uuid) {
+        Optional<Player> result = loader.getGame().getServer().getPlayer(uuid);
+        return result.map(player -> new com.greatmancode.tools.entities.Player(player.getName(), player.getDisplayNameData().displayName().toString(), player.getWorld().getName(), player.getUniqueId())).orElse(null);
     }
 }

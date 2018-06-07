@@ -157,7 +157,7 @@ public class Metrics {
      * @return Amount of online players
      */
     public int getPlayersOnline() {
-        return caller.getPlayerCaller().getOnlinePlayers().size();
+        return caller.getPlayerCaller().getUUIDsOnlinePlayers().size();
     }
 
     /**

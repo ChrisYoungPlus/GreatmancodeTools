@@ -18,8 +18,12 @@
  */
 package com.greatmancode.tools.commands;
 
+import lombok.Data;
+
+@Data
 public class ConsoleCommandSender implements CommandSender {
 
+    private final String name = "console";
     @Override
     public String toString() {
         return "console";

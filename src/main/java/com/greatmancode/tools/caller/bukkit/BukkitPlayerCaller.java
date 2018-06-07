@@ -22,6 +22,7 @@ import com.greatmancode.tools.interfaces.BukkitLoader;
 import com.greatmancode.tools.interfaces.caller.PlayerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -33,6 +34,17 @@ public class BukkitPlayerCaller extends PlayerCaller {
         super(caller);
     }
 
+
+    private Player getBukkitPlayer(UUID uuid){
+        return ((BukkitLoader) getCaller().getLoader()).getServer().getPlayer(uuid);
+
+    }
+
+    private OfflinePlayer getOfflinePlayer(UUID uuid){
+        return ((BukkitLoader) getCaller().getLoader()).getServer().getOfflinePlayer(uuid);
+
+    }
+    
     @Deprecated
     @Override
     public boolean checkPermission(String playerName, String perm) {
@@ -47,6 +59,20 @@ public class BukkitPlayerCaller extends PlayerCaller {
         return result;
     }
 
+    @Override
+    public boolean checkPermission(UUID uuid, String perm) {
+        Player p = getBukkitPlayer(uuid);
+        if (p != null) {
+            return (p.isOp() || p.hasPermission(perm));
+        } else {
+//            OfflinePlayer off = getOfflinePlayer(uuid);
+//            if(off != null){
+//                return false;
+//            }
+            return true;
+        }
+    }
+    
     @Deprecated
     @Override
     public void sendMessage(String playerName, String message) {
@@ -58,6 +84,16 @@ public class BukkitPlayerCaller extends PlayerCaller {
         }
     }
 
+    @Override
+    public void sendMessage(UUID uuid, String message) {
+        Player p = getBukkitPlayer(uuid);
+        if (p != null) {
+            p.sendMessage(getCaller().addColor(getCaller().getCommandPrefix() + message));
+        } else {
+            ((BukkitLoader) getCaller().getLoader()).getServer().getConsoleSender().sendMessage(getCaller().addColor(getCaller().getCommandPrefix() + message));
+        }
+    }
+    
     @Deprecated
     @Override
     public String getPlayerWorld(String playerName) {
@@ -76,7 +112,12 @@ public class BukkitPlayerCaller extends PlayerCaller {
     public boolean isOnline(String playerName) {
         return ((BukkitLoader) getCaller().getLoader()).getServer().getPlayerExact(playerName) != null;
     }
-
+    
+    @Override
+    public boolean isOnline(UUID uuid) {
+        return ((BukkitLoader) getCaller().getLoader()).getServer().getPlayer(uuid) != null;
+    }
+    
     @Override
     public List<String> getOnlinePlayers() {
         List<String> list = new ArrayList<String>();
@@ -85,15 +126,29 @@ public class BukkitPlayerCaller extends PlayerCaller {
         }
         return list;
     }
+    
+    @Override
+    public List<UUID> getUUIDsOnlinePlayers() {
+        List<UUID> result = new ArrayList<>();
+        for (Player player:  ((BukkitLoader) getCaller().getLoader()).getServer().getOnlinePlayers()){
+            result.add(player.getUniqueId());
+        }
+        return result;
+    }
 
+    /**
+     *
+     * @param playerName The player name to check
+     * @return boolean true if Op
+     * @deprecated Use {@code isOp(UUID) }
+     */
+    
     @Deprecated
     @Override
-    @Deprecated
     public boolean isOp(String playerName) {
         return ((BukkitLoader) getCaller().getLoader()).getServer().getOfflinePlayer(playerName).isOp();
     }
 
-    @Deprecated
     @Override
     public boolean isOP(UUID uuid) {
         return ((BukkitLoader) getCaller().getLoader()).getServer().getOfflinePlayer(uuid).isOp();
@@ -102,6 +157,27 @@ public class BukkitPlayerCaller extends PlayerCaller {
     @Override
     @Deprecated
     public UUID getUUID(String playerName) {
+        OfflinePlayer offline = Bukkit.getOfflinePlayer(playerName);
+        UUID uuid = offline.getUniqueId();
+        Player player = getBukkitPlayer(uuid);
+        if (player != null){
+            return player.getUniqueId();
+        }
+        getCaller().getLogger().warning("Returning offline Player UUID for : " + playerName);
         return Bukkit.getOfflinePlayer(playerName).getUniqueId();
+    }
+    
+    @Override
+    public String getPlayerName(UUID uuid) {
+        return Bukkit.getOfflinePlayer(uuid).getName();
+    }
+    
+    @Override
+    public com.greatmancode.tools.entities.Player getPlayer(UUID uuid) {
+        Player player = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayer(uuid);
+        if (player == null)return null;
+        return new com.greatmancode.tools.entities.Player(player.getName(),
+                player.getDisplayName(),player.getWorld().getName(),
+                player.getUniqueId());
     }
 }

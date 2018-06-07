@@ -19,7 +19,6 @@
 package com.greatmancode.tools.caller.unittest;
 
 import com.greatmancode.tools.commands.SubCommand;
-import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.Event;
 import com.greatmancode.tools.interfaces.Common;
 import com.greatmancode.tools.interfaces.Loader;

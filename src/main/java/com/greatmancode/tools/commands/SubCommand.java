@@ -54,24 +54,26 @@ public class SubCommand implements Command {
         return commandList.containsKey(name);
     }
 
-    public void execute(String command, String sender, String[] args) {
+    public void execute(String command, CommandSender sender, String[] args) {
         if (level <= commandHandler.getCurrentLevel()) {
             if (commandExist(command)) {
                 Command entry = commandList.get(command);
                 if (entry instanceof CommandExecutor) {
                     CommandExecutor cmd = ((CommandExecutor) entry);
-                    if (commandHandler.getServerCaller().getPlayerCaller().checkPermission(sender, cmd.getPermissionNode())) {
-                        if (cmd.playerOnly() && sender.equalsIgnoreCase("console")) {
-                            commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, "{{DARK_RED}}Only players can do this command!");
-                            return;
+                    if(sender instanceof ConsoleCommandSender){
+                        if(cmd.playerOnly()){
+                            commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender.toString(), "{{DARK_RED}}Only players can do this command!");
                         }
-                        if (args.length >= cmd.minArgs() && args.length <= cmd.maxArgs()) {
-                            cmd.execute(sender, args);
-                        } else {
-                            commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, cmd.help());
+                    }else if (sender instanceof PlayerCommandSender){
+                        if(commandHandler.getServerCaller().getPlayerCaller().checkPermission(((PlayerCommandSender)
+                                sender).getUuid(),cmd.getPermissionNode())){
+                            if (args.length >= cmd.minArgs() && args.length <= cmd.maxArgs()) {
+                                cmd.execute(sender, args);
+                            } else {
+                                commandHandler.getServerCaller().getPlayerCaller().sendMessage(((PlayerCommandSender) sender).getUuid(), cmd.help());
+                            }
                         }
-                    } else {
-                        commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, "{{DARK_RED}}Permission denied!");
+
                     }
                 } else if (entry instanceof SubCommand) {
                     SubCommand subCommand = (SubCommand) entry;
@@ -93,27 +95,48 @@ public class SubCommand implements Command {
                     }
                 }
             } else {
-                commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, "{{DARK_GREEN}}========= {{WHITE}}Help {{DARK_GREEN}}========");
-                for (Map.Entry<String, Command> iteratorEntry : commandList.entrySet()) {
-                    Command commandEntry = iteratorEntry.getValue();
-                    if (commandEntry instanceof CommandExecutor) {
-                        CommandExecutor cmd = ((CommandExecutor) iteratorEntry.getValue());
-                        if (commandHandler.getServerCaller().getPlayerCaller().checkPermission(sender, cmd.getPermissionNode())) {
-                            commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, cmd.help());
+                if (sender instanceof ConsoleCommandSender) {
+                    commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender.toString(), "{{DARK_GREEN}}========= {{WHITE}}Help {{DARK_GREEN}}========");
+                    for (Map.Entry<String, Command> iteratorEntry : commandList.entrySet()) {
+                        Command commandEntry = iteratorEntry.getValue();
+                        if (commandEntry instanceof CommandExecutor) {
+                            CommandExecutor cmd = ((CommandExecutor) iteratorEntry.getValue());
+                            commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender.toString(), cmd.help());
+                        } else {
+                            SubCommand subCmd = (SubCommand) commandEntry;
+                            String subCommandResult = "";
+                            while (subCmd.parent != null) {
+                                subCommandResult = subCmd.parent.name + "" + subCommandResult;
+                            }
+                            subCommandResult = "/" + subCommandResult + " " + subCmd.name;
+                            commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender.toString(), subCommandResult);
                         }
-                    } else {
-                        SubCommand subCmd = (SubCommand) commandEntry;
-                        String subCommandResult = "";
-                        while (subCmd.parent != null) {
-                            subCommandResult = subCmd.parent.name + "" + subCommandResult;
-                        }
-                        subCommandResult = "/" + subCommandResult + " " + subCmd.name;
-                        commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, subCommandResult);
                     }
+                } else if (sender instanceof PlayerCommandSender) {
+                    commandHandler.getServerCaller().getPlayerCaller().sendMessage(((PlayerCommandSender) sender).getUuid(), "{{DARK_GREEN}}========= {{WHITE}}Help {{DARK_GREEN}}========");
+                    for (Map.Entry<String, Command> iteratorEntry : commandList.entrySet()) {
+                        Command commandEntry = iteratorEntry.getValue();
+                        if (commandEntry instanceof CommandExecutor) {
+                            String perm = ((CommandExecutor) commandEntry).getPermissionNode();
+                            if (commandHandler.getServerCaller().getPlayerCaller().checkPermission(((PlayerCommandSender) sender).getUuid(), perm)) {
+                                commandHandler.getServerCaller().getPlayerCaller().sendMessage(((PlayerCommandSender) sender).getUuid(), ((CommandExecutor) commandEntry).help());
+                            }
+                        } else {
+                            SubCommand subCmd = (SubCommand) commandEntry;
+                            String subCommandResult = "";
+                            while (subCmd.parent != null) {
+                                subCommandResult = subCmd.parent.name + "" + subCommandResult;
+                            }
+                            subCommandResult = "/" + subCommandResult + " " + subCmd.name;
+                            commandHandler.getServerCaller().getPlayerCaller().sendMessage(((PlayerCommandSender) sender).getUuid(), subCommandResult);
+                        }
+
+                    }
+
                 }
             }
         } else {
-            commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, commandHandler.getWrongLevelMsg());
+            commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender.toString(), commandHandler.getWrongLevelMsg());
         }
     }
 
