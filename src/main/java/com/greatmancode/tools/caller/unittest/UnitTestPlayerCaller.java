@@ -102,7 +102,17 @@ public class UnitTestPlayerCaller extends PlayerCaller {
     public Player getPlayer(UUID uuid) {
         return new Player("UnitTestPlayer","UnitTestPlayer","UnitTestWorld",UUID.fromString("0000-0000-0000-0000"));
     }
-
+    
+    @Override
+    public Player getOnlinePlayer(String name) {
+        return new Player("UnitTestPlayer","UnitTestPlayer","UnitTestWorld",UUID.fromString("0000-0000-0000-0000"));
+    }
+    
+    @Override
+    public Player getOnlinePlayer(UUID uuid) {
+        return new Player("UnitTestPlayer","UnitTestPlayer","UnitTestWorld",UUID.fromString("0000-0000-0000-0000"));
+    }
+    
     @Override
     public List<String> getOnlinePlayers() {
         List<String> list = new ArrayList<String>();
