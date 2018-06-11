@@ -18,16 +18,23 @@
  */
 package com.greatmancode.tools.entities;
 
+import com.greatmancode.tools.commands.PlayerCommandSender;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.EqualsAndHashCode;
 
 import java.util.UUID;
 
 @Data
-@RequiredArgsConstructor
-public class Player {
-    private final String name;
+@EqualsAndHashCode(callSuper = true)
+public class Player extends PlayerCommandSender {
+
     private final String displayName;
     private final String worldName;
-    private final UUID uuid;
+
+    public Player(String name, String displayName, String worldName, UUID uuid){
+        super(name,uuid);
+        this.displayName = displayName;
+        this.worldName = worldName;
+    }
+
 }

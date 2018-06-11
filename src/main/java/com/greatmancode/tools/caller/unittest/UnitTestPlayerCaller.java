@@ -18,6 +18,7 @@
  */
 package com.greatmancode.tools.caller.unittest;
 
+import com.greatmancode.tools.entities.Player;
 import com.greatmancode.tools.interfaces.caller.PlayerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
@@ -31,14 +32,29 @@ public class UnitTestPlayerCaller extends PlayerCaller {
     }
 
     @Override
+    public ServerCaller getCaller() {
+        return super.getCaller();
+    }
+
+    @Override
     public boolean checkPermission(String playerName, String perm) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
+    public boolean checkPermission(UUID uuid, String perm) {
+        return false;
+    }
+
+    @Override
     public void sendMessage(String playerName, String message) {
         caller.getLogger().info(playerName + ":" + message);
+    }
+
+    @Override
+    public void sendMessage(UUID uuid, String message) {
+        caller.getLogger().info(uuid.toString() + ":" + message);
     }
 
     @Override
@@ -57,6 +73,11 @@ public class UnitTestPlayerCaller extends PlayerCaller {
     }
 
     @Override
+    public boolean isOnline(UUID uuid) {
+        return uuid.equals(UUID.fromString("0000-0000-0000-0000"));
+    }
+
+    @Override
     @Deprecated
     public boolean isOp(String playerName) {
         return playerName.equals("UnitTestPlayer");
@@ -64,18 +85,36 @@ public class UnitTestPlayerCaller extends PlayerCaller {
 
     @Override
     public boolean isOP(UUID uuid) {
-        return true ;
+        return uuid.equals(UUID.fromString("0000-0000-0000-0000"));
     }
 
     @Override
     public UUID getUUID(String playerName) {
-        return UUID.fromString(playerName);
+        return UUID.fromString("0000-0000-0000-0000");
+    }
+
+    @Override
+    public String getPlayerName(UUID uuid) {
+        return "UnitTestPlayer";
+    }
+
+    @Override
+    public Player getPlayer(UUID uuid) {
+        return new Player("UnitTestPlayer","UnitTestPlayer","UnitTestWorld",UUID.fromString("0000-0000-0000-0000"));
     }
 
     @Override
     public List<String> getOnlinePlayers() {
         List<String> list = new ArrayList<String>();
         list.add("UnitTestPlayer");
+        return list;
+    }
+
+    @Override
+    public List<UUID> getUUIDsOnlinePlayers() {
+        List<UUID> list = new ArrayList<>();
+
+        list.add(UUID.fromString("0000-0000-0000-0000"));
         return list;
     }
 }

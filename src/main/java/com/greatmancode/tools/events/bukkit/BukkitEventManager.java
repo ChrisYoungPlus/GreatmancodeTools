@@ -19,8 +19,8 @@
 package com.greatmancode.tools.events.bukkit;
 
 import com.greatmancode.tools.events.interfaces.ServerEventManager;
-import com.greatmancode.tools.events.playerevent.PlayerJoinEvent;
-import com.greatmancode.tools.events.playerevent.PreJoinEvent;
+import com.greatmancode.tools.events.playerEvent.PlayerJoinEvent;
+import com.greatmancode.tools.events.playerEvent.PreJoinEvent;
 import com.greatmancode.tools.interfaces.BukkitLoader;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import org.bukkit.Bukkit;

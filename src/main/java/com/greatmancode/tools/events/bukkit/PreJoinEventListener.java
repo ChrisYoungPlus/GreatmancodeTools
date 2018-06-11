@@ -19,7 +19,7 @@
 package com.greatmancode.tools.events.bukkit;
 
 import com.greatmancode.tools.events.EventManager;
-import com.greatmancode.tools.events.playerevent.PreJoinEvent;
+import com.greatmancode.tools.events.playerEvent.PreJoinEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;

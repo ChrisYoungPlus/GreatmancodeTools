@@ -1,7 +1,7 @@
 /**
  * This file is part of GreatmancodeTools.
  *
- * Copyright (c) 2013-2016, Greatman <http://github.com/greatman/>
+ * Copyright (c) 2013-2016, Narimm <http://github.com/narimm/>
  *
  * GreatmancodeTools is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -16,19 +16,27 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with GreatmancodeTools.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.greatmancode.tools.events.playerEvent;
 
-import com.greatmancode.tools.entities.Player;
-import com.greatmancode.tools.events.Event;
+package com.greatmancode.tools.commands;
+
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
+
+import java.util.UUID;
+
+/**
+ * Created for the AddstarMC Program.
+ * Created by Narimm on 19/02/2018.
+ */
 
 @Data
-@EqualsAndHashCode(callSuper=false)
-public class PlayerJoinEvent extends Event {
-    private final Player p;
+@RequiredArgsConstructor
+public class PlayerCommandSender implements CommandSender {
+    private final String name;
+    private final UUID uuid;
 
-    public PlayerJoinEvent(Player p) {
-        this.p = p;
+    @Override
+    public String toString() {
+        return name;
     }
 }

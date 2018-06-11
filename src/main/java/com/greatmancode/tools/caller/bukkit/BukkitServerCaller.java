@@ -19,8 +19,6 @@
 package com.greatmancode.tools.caller.bukkit;
 
 import com.greatmancode.tools.commands.SubCommand;
-import com.greatmancode.tools.commands.bukkit.BukkitCommandReceiver;
-import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.Event;
 import com.greatmancode.tools.events.event.EconomyChangeEvent;
 import com.greatmancode.tools.interfaces.BukkitLoader;

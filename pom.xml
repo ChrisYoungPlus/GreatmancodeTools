@@ -83,14 +83,14 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.spigotmc</groupId>
-			<artifactId>spigot-api  </artifactId>
-			<version>1.12-pre6-SNAPSHOT</version>
+			<artifactId>spigot-api</artifactId>
+			<version>1.12.2-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.milkbowl.vault</groupId>
-			<artifactId>Vault</artifactId>
-			<version>1.6.6</version>
+			<artifactId>VaultAPI</artifactId>
+			<version>1.6</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
@@ -121,7 +121,7 @@
 		<dependency>
 			<groupId>org.spongepowered</groupId>
 			<artifactId>spongeapi</artifactId>
-			<version>3.0.0</version>
+			<version>5.1.0</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -133,7 +133,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.12</version>
+            <version>1.16.16</version>
             <scope>provided</scope>
         </dependency>
 	</dependencies>
