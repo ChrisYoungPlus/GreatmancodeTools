@@ -35,12 +35,16 @@ import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.source.ConsoleSource;
+import org.spongepowered.api.text.LiteralText;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColor;
 import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.text.format.TextStyle;
 import org.spongepowered.api.text.format.TextStyles;
+import org.spongepowered.api.world.Location;
+import org.spongepowered.api.world.World;
 
+import javax.annotation.Nullable;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -213,8 +217,14 @@ public class SpongeServerCaller extends ServerCaller {
                 }
                 return CommandResult.success();
             }
-
+    
             @Override
+            public List<String> getSuggestions(CommandSource source, String arguments, @Nullable Location<World> targetPosition) throws CommandException {
+                List<String> list = new ArrayList<>();
+                list.addAll(subCommand.getSubCommandKeys());
+                return list;
+            }
+    
             public List<String> getSuggestions(CommandSource source, String arguments) throws CommandException {
                 List<String> list = new ArrayList<>();
                 list.addAll(subCommand.getSubCommandKeys());
@@ -225,14 +235,14 @@ public class SpongeServerCaller extends ServerCaller {
             public boolean testPermission(CommandSource source) {
                 return true;
             }
-
+    
             @Override
-            public java.util.Optional<? extends Text> getShortDescription(CommandSource source) {
+            public Optional<Text> getShortDescription(CommandSource source) {
                 return Optional.empty();
             }
-
+    
             @Override
-            public java.util.Optional<? extends Text> getHelp(CommandSource source) {
+            public Optional<Text> getHelp(CommandSource source) {
                 return Optional.empty();
             }
 

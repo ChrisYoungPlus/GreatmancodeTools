@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with GreatmancodeTools.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.greatmancode.tools.events.playerevent;
+package com.greatmancode.tools.events.playerEvent;
 
 import com.greatmancode.tools.entities.Player;
 import com.greatmancode.tools.events.Event;

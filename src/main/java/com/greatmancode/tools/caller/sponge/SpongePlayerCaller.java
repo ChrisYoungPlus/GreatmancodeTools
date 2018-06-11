@@ -23,6 +23,7 @@ import com.greatmancode.tools.interfaces.caller.PlayerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.service.permission.PermissionService;
+import org.spongepowered.api.util.Identifiable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,7 +114,8 @@ public class SpongePlayerCaller extends PlayerCaller {
 
     @Override
     public UUID getUUID(String playerName) {
-        return loader.getGame().getServer().getPlayer(playerName).get().getUniqueId();
+        Optional<Player> result = loader.getGame().getServer().getPlayer(playerName);
+        return result.map(Identifiable::getUniqueId).orElse(null);
     }
 
     @Override
@@ -125,5 +127,25 @@ public class SpongePlayerCaller extends PlayerCaller {
     public com.greatmancode.tools.entities.Player getPlayer(UUID uuid) {
         Optional<Player> result = loader.getGame().getServer().getPlayer(uuid);
         return result.map(player -> new com.greatmancode.tools.entities.Player(player.getName(), player.getDisplayNameData().displayName().toString(), player.getWorld().getName(), player.getUniqueId())).orElse(null);
+    }
+    
+    @Override
+    public com.greatmancode.tools.entities.Player getOnlinePlayer(String name) {
+        Optional<Player> result = loader.getGame().getServer().getPlayer(name);
+        if (result.isPresent() && result.get().isOnline()) {
+            return result.map(player ->
+                    new com.greatmancode.tools.entities.Player(player.getName(), player.getDisplayNameData().displayName().toString(), player.getWorld().getName(), player.getUniqueId())).orElse(null);
+        }
+        return null;
+    }
+    
+    @Override
+    public com.greatmancode.tools.entities.Player getOnlinePlayer(UUID uuid) {
+        Optional<Player> result = loader.getGame().getServer().getPlayer(uuid);
+        if (result.isPresent() && result.get().isOnline()) {
+            return result.map(player ->
+                    new com.greatmancode.tools.entities.Player(player.getName(), player.getDisplayNameData().displayName().toString(), player.getWorld().getName(), player.getUniqueId())).orElse(null);
+        }
+        return null;
     }
 }

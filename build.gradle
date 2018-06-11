@@ -70,6 +70,7 @@ license {
     ext.copyright = 'Copyright (c) 2013-2016, Greatman'
     ext.url = 'http://github.com/greatman'
     ext.name = 'GreatmancodeTools'
+    ignoreFailures = true
 }
 
 // child script to publish to a maven repo

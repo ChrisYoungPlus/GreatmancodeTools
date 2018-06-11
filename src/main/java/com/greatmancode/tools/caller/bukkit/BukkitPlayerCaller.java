@@ -155,7 +155,6 @@ public class BukkitPlayerCaller extends PlayerCaller {
     }
 
     @Override
-    @Deprecated
     public UUID getUUID(String playerName) {
         OfflinePlayer offline = Bukkit.getOfflinePlayer(playerName);
         UUID uuid = offline.getUniqueId();
@@ -179,5 +178,28 @@ public class BukkitPlayerCaller extends PlayerCaller {
         return new com.greatmancode.tools.entities.Player(player.getName(),
                 player.getDisplayName(),player.getWorld().getName(),
                 player.getUniqueId());
+    }
+    
+    @Override
+    public com.greatmancode.tools.entities.Player getOnlinePlayer(String name) {
+        Player player = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayerExact(name);
+        if( player != null && player.isOnline()){
+            return new com.greatmancode.tools.entities.Player(player.getName(),
+                    player.getDisplayName(),player.getWorld().getName(),
+                    player.getUniqueId());
+        }
+        return null;
+    }
+    
+    @Override
+    public com.greatmancode.tools.entities.Player getOnlinePlayer(UUID uuid) {
+        Player player = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayer(uuid);
+        if (player == null)return null;
+        if(player.isOnline()) {
+            return new com.greatmancode.tools.entities.Player(player.getName(),
+                    player.getDisplayName(), player.getWorld().getName(),
+                    player.getUniqueId());
+        }
+        return null;
     }
 }

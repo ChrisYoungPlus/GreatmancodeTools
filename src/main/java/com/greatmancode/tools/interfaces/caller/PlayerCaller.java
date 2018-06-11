@@ -141,7 +141,7 @@ public abstract class PlayerCaller {
      * @param playerName The player name
      * @return The UUID of the player
      */
-    @Deprecated
+
     public abstract UUID getUUID(String playerName);
     
     /**
@@ -158,4 +158,18 @@ public abstract class PlayerCaller {
      * @return @{code Player} Player object
      */
     public abstract Player getPlayer(UUID uuid);
+    
+    /**
+     *
+     * @param name name of online player to check
+     * @return
+     */
+    public abstract Player getOnlinePlayer(String name);
+    
+    /**
+     * @param uuid uuid of online player to check
+     * @return
+     */
+    public abstract Player getOnlinePlayer(UUID uuid);
+    
 }

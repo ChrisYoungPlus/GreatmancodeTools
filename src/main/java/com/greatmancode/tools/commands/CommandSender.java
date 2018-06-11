@@ -18,7 +18,10 @@
  */
 package com.greatmancode.tools.commands;
 
+import java.util.UUID;
+
 public interface CommandSender {
 
     public String getName();
+    public UUID getUuid();
 }
