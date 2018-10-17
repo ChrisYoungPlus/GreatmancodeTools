@@ -35,7 +35,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EventManager {
-    private Map<String, ListenerRegistration> eventList = new HashMap<String, ListenerRegistration>();
+    private Map<String, ListenerRegistration> eventList = new HashMap<>();
     private static EventManager instance;
     private ServerEventManager eventManager;
     private ServerCaller serverCaller;

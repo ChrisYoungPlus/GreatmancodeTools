@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class UnitTestPlayerCaller extends PlayerCaller {
+    private UUID playeruuid = UUID.fromString("00000000-0000-0000-0000-000000000000");
     public UnitTestPlayerCaller(ServerCaller caller) {
         super(caller);
     }
@@ -74,7 +75,7 @@ public class UnitTestPlayerCaller extends PlayerCaller {
 
     @Override
     public boolean isOnline(UUID uuid) {
-        return uuid.equals(UUID.fromString("0000-0000-0000-0000"));
+        return uuid.equals(playeruuid);
     }
 
     @Override
@@ -85,12 +86,12 @@ public class UnitTestPlayerCaller extends PlayerCaller {
 
     @Override
     public boolean isOP(UUID uuid) {
-        return uuid.equals(UUID.fromString("0000-0000-0000-0000"));
+        return uuid.equals(playeruuid);
     }
 
     @Override
     public UUID getUUID(String playerName) {
-        return UUID.fromString("0000-0000-0000-0000");
+        return playeruuid;
     }
 
     @Override
@@ -100,22 +101,22 @@ public class UnitTestPlayerCaller extends PlayerCaller {
 
     @Override
     public Player getPlayer(UUID uuid) {
-        return new Player("UnitTestPlayer","UnitTestPlayer","UnitTestWorld",UUID.fromString("0000-0000-0000-0000"));
+        return new Player("UnitTestPlayer","UnitTestPlayer","UnitTestWorld",playeruuid);
     }
     
     @Override
     public Player getOnlinePlayer(String name) {
-        return new Player("UnitTestPlayer","UnitTestPlayer","UnitTestWorld",UUID.fromString("0000-0000-0000-0000"));
+        return new Player("UnitTestPlayer","UnitTestPlayer","UnitTestWorld",playeruuid);
     }
     
     @Override
     public Player getOnlinePlayer(UUID uuid) {
-        return new Player("UnitTestPlayer","UnitTestPlayer","UnitTestWorld",UUID.fromString("0000-0000-0000-0000"));
+        return new Player("UnitTestPlayer","UnitTestPlayer","UnitTestWorld",playeruuid);
     }
     
     @Override
     public List<String> getOnlinePlayers() {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         list.add("UnitTestPlayer");
         return list;
     }
@@ -124,7 +125,7 @@ public class UnitTestPlayerCaller extends PlayerCaller {
     public List<UUID> getUUIDsOnlinePlayers() {
         List<UUID> list = new ArrayList<>();
 
-        list.add(UUID.fromString("0000-0000-0000-0000"));
+        list.add(playeruuid);
         return list;
     }
 }

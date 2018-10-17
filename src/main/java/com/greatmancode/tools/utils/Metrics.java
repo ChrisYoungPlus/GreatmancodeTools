@@ -79,7 +79,7 @@ public class Metrics {
     /**
      * All of the custom graphs to submit to metrics
      */
-    private final Set<Graph> graphs = Collections.synchronizedSet(new HashSet<Graph>());
+    private final Set<Graph> graphs = Collections.synchronizedSet(new HashSet<>());
     /**
      * The plugin configuration file
      */
@@ -392,29 +392,25 @@ public class Metrics {
                 json.append('{');
 
                 boolean firstGraph = true;
-
-                final Iterator<Graph> iter = graphs.iterator();
-
-                while (iter.hasNext()) {
-                    Graph graph = iter.next();
-
+    
+                for (Graph graph : graphs) {
                     StringBuilder graphJson = new StringBuilder();
                     graphJson.append('{');
-
+        
                     for (Plotter plotter : graph.getPlotters()) {
                         appendJSONPair(graphJson, plotter.getColumnName(), Integer.toString(plotter.getValue()));
                     }
-
+        
                     graphJson.append('}');
-
+        
                     if (!firstGraph) {
                         json.append(',');
                     }
-
+        
                     json.append(escapeJSON(graph.getName()));
                     json.append(':');
                     json.append(graphJson);
-
+        
                     firstGraph = false;
                 }
 
@@ -481,11 +477,8 @@ public class Metrics {
             // Is this the first update this hour?
             if (response.equals("1") || response.contains("This is your first update this hour")) {
                 synchronized (graphs) {
-                    final Iterator<Graph> iter = graphs.iterator();
-
-                    while (iter.hasNext()) {
-                        final Graph graph = iter.next();
-
+    
+                    for (Graph graph : graphs) {
                         for (Plotter plotter : graph.getPlotters()) {
                             plotter.reset();
                         }
@@ -503,20 +496,11 @@ public class Metrics {
      */
     public static byte[] gzip(String input) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        GZIPOutputStream gzos = null;
-
-        try {
-            gzos = new GZIPOutputStream(baos);
+    
+        try (GZIPOutputStream gzos = new GZIPOutputStream(baos)) {
             gzos.write(input.getBytes("UTF-8"));
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (gzos != null) {
-                try {
-                    gzos.close();
-                } catch (IOException ignore) {
-                }
-            }
         }
 
         return baos.toByteArray();
@@ -638,7 +622,7 @@ public class Metrics {
         /**
          * The set of plotters that are contained within this graph
          */
-        private final Set<Plotter> plotters = new LinkedHashSet<Plotter>();
+        private final Set<Plotter> plotters = new LinkedHashSet<>();
 
         private Graph(final String name) {
             this.name = name;

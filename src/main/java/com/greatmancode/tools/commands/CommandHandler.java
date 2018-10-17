@@ -34,7 +34,7 @@ public class CommandHandler {
     @Getter
     private CommandReceiver commandReceiver;
 
-    private Map<String, SubCommand> commandList = new HashMap<String, SubCommand>();
+    private Map<String, SubCommand> commandList = new HashMap<>();
     @Setter
     @Getter
     private int currentLevel = 0;

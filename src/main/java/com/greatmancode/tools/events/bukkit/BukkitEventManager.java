@@ -30,7 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BukkitEventManager implements ServerEventManager {
-    private Map<String, Listener> map = new HashMap<String, Listener>();
+    private Map<String, Listener> map = new HashMap<>();
 
     public BukkitEventManager() {
         map.put(PlayerJoinEvent.class.getName(), new PlayerJoinEventListener());

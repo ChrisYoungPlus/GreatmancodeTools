@@ -28,7 +28,7 @@ import java.util.Map;
 
 public class LanguageManager {
     private Config languageFile = null;
-    private Map<String, String> languageList = new HashMap<String, String>();
+    private Map<String, String> languageList = new HashMap<>();
     private ServerCaller serverCaller;
     private File path;
     private String fileName;

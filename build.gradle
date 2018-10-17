@@ -47,7 +47,7 @@ dependencies {
     provided group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     provided group: 'org.spigotmc', name: 'spigot-api', version: '1.12.2-R0.1-SNAPSHOT'
     provided group: 'org.projectlombok', name: 'lombok', version: '1.16.16'
-    provided group: 'org.spongepowered', name: 'spongeapi', version: '5.1.0'
+    provided group: 'org.spongepowered', name: 'spongeapi', version: '7.1.0'
     provided group: 'net.milkbowl.vault', name: 'VaultAPI', version: '1.6'
     provided group: 'be.maximvdw', name: 'MVdWPlaceholderAPI', version: '1.0.2-SNAPSHOT'
     testCompile group: 'junit', name: 'junit', version: '4.12'

@@ -22,14 +22,15 @@ import com.greatmancode.tools.entities.Player;
 import com.greatmancode.tools.events.EventManager;
 import com.greatmancode.tools.events.playerEvent.PlayerJoinEvent;
 import org.spongepowered.api.event.Listener;
+import org.spongepowered.api.event.network.ClientConnectionEvent;
 
 public class PlayerJoinEventListener {
 
     @Listener
-    public void onPlayerJoinEvent(PlayerJoinEvent event) {
-        com.greatmancode.tools.events.playerEvent.PlayerJoinEvent pEvent = new com.greatmancode.tools.events
-                .playerEvent.PlayerJoinEvent(new Player(event.getP().getName(), event.getP().getDisplayName(), event
-                .getP().getWorldName(), event.getP().getUuid()));
+    public void onPlayerJoinEvent(ClientConnectionEvent.Join event) {
+        PlayerJoinEvent pEvent = new PlayerJoinEvent(new Player(event.getTargetEntity().getName(),
+                event.getTargetEntity().getDisplayNameData().displayName().toString(), event
+                .getTargetEntity().getWorld().getName(), event.getTargetEntity().getUniqueId()));
         EventManager.getInstance().callEvent(pEvent);
     }
 }

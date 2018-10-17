@@ -37,12 +37,7 @@ public class FeatherBoard {
     public static void registerPlaceHolder(Loader loader, String name, final FeatherBoardReplaceEvent event) {
         if (loader instanceof BukkitLoader) {
             if (Bukkit.getPluginManager().isPluginEnabled("MVdWPlaceholderAPI")) {
-                PlaceholderAPI.registerPlaceholder((Plugin) loader, name, new PlaceholderReplacer() {
-                    @Override
-                    public String onPlaceholderReplace(PlaceholderReplaceEvent placeholderReplaceEvent) {
-                        return event.getValue(placeholderReplaceEvent.getOfflinePlayer().getName(), placeholderReplaceEvent.isOnline());
-                    }
-                });
+                PlaceholderAPI.registerPlaceholder((Plugin) loader, name, placeholderReplaceEvent -> event.getValue(placeholderReplaceEvent.getOfflinePlayer().getName(), placeholderReplaceEvent.isOnline()));
             }
         }
     }
