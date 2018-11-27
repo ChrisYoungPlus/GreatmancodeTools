@@ -51,6 +51,11 @@ public class UnitTestLoader implements Loader {
     }
 
     @Override
+    public java.util.logging.Logger getLogger() {
+        return java.util.logging.Logger.getLogger("GreatmanCodeTools");
+    }
+
+    @Override
     public Common getCommon() {
         return null;
     }

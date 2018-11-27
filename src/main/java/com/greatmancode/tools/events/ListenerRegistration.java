@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ListenerRegistration {
-    private Map<Listener, Method> list = new HashMap<Listener, Method>();
+    private Map<Listener, Method> list = new HashMap<>();
 
     public void addListener(Listener listener, Method method) {
         if (listener != null && method != null) {
@@ -38,13 +38,7 @@ public class ListenerRegistration {
         for (Map.Entry<Listener, Method> methodList : list.entrySet()) {
             try {
                 methodList.getValue().invoke(methodList.getKey(), event);
-            } catch (IllegalAccessException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IllegalArgumentException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
+            } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }

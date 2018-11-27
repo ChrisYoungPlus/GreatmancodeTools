@@ -22,6 +22,7 @@ import com.greatmancode.tools.interfaces.SpongeLoader;
 import com.greatmancode.tools.interfaces.caller.PlayerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.service.ServiceManager;
 import org.spongepowered.api.service.permission.PermissionService;
 import org.spongepowered.api.util.Identifiable;
 
@@ -51,7 +52,14 @@ public class SpongePlayerCaller extends PlayerCaller {
 
     @Override
     public boolean checkPermission(UUID uuid, String perm) {
-        return loader.getGame().getServiceManager().provide(PermissionService.class).get().getUserSubjects().get(uuid.toString()).hasPermission(perm);
+        PermissionService manager =
+                (loader.getGame().getServiceManager().provide(PermissionService.class).isPresent())?loader.getGame().getServiceManager().provide(PermissionService.class).get():null;
+        
+        if(manager==null){
+            loader.getLogger().info("PermissionService not found");
+            return false;
+        }
+        return (manager.getUserSubjects().getSubject(uuid.toString()).isPresent()) && manager.getUserSubjects().getSubject(uuid.toString()).get().hasPermission(perm);
     }
 
     @Override

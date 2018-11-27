@@ -27,6 +27,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=false)
 public class PlayerJoinEvent extends Event {
     private final Player p;
+    
 
     public PlayerJoinEvent(Player p) {
         this.p = p;

@@ -25,7 +25,7 @@ import lombok.Getter;
 import java.util.*;
 
 public class SubCommand implements Command {
-    private Map<String, Command> commandList = new HashMap<String, Command>();
+    private Map<String, Command> commandList = new HashMap<>();
     private CommandHandler commandHandler;
     private SubCommand parent;
     @Getter

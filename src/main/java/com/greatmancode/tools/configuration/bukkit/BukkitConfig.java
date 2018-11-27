@@ -89,7 +89,7 @@ public class BukkitConfig extends Config {
 
     @Override
     public Map<String, String> getStringMap(String path) {
-        Map<String, String> values = new HashMap<String, String>();
+        Map<String, String> values = new HashMap<>();
         ConfigurationSection configurationSection = configFile.getConfigurationSection(path);
         if (configurationSection != null) {
             for (Map.Entry<String, Object> entry : configurationSection.getValues(false).entrySet()) {

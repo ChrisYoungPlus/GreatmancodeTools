@@ -26,7 +26,6 @@ import lombok.Getter;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.event.Listener;
-import org.spongepowered.api.event.game.state.GameAboutToStartServerEvent;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.event.game.state.GameStoppingServerEvent;
 import org.spongepowered.api.plugin.Plugin;
@@ -46,7 +45,8 @@ public class SpongeLoader implements Loader {
     private Game game;
     private EventManager eventManager;
     private Common common;
-
+    @Getter
+    private java.util.logging.Logger logger;
 
     @Listener
     public void preInitialisationEvent(GameStartedServerEvent event) {
@@ -62,6 +62,7 @@ public class SpongeLoader implements Loader {
     @Override
     public void onEnable() {
         SpongeServerCaller serverCaller = new SpongeServerCaller(this, getClass().getAnnotation(Plugin.class).name(), getClass().getAnnotation(Plugin.class).version());
+        logger = serverCaller.getLogger();
         eventManager = new EventManager(serverCaller);
         InputStream is = this.getClass().getResourceAsStream("/loader.yml");
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -81,15 +82,7 @@ public class SpongeLoader implements Loader {
             } else {
                 serverCaller.getLogger().severe("The class " + mainClass + " is invalid!");
             }
-        } catch (IOException e) {
-            serverCaller.getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
-        } catch (ClassNotFoundException e) {
-            serverCaller.getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
-        } catch (InstantiationException e) {
-            serverCaller.getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
-        } catch (IllegalAccessException e) {
-            serverCaller.getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IOException | ArrayIndexOutOfBoundsException | IllegalAccessException | InstantiationException | ClassNotFoundException e) {
             serverCaller.getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
         }
     }
@@ -107,6 +100,11 @@ public class SpongeLoader implements Loader {
     @Override
     public EventManager getEventManager() {
         return eventManager;
+    }
+
+    @Override
+    public java.util.logging.Logger getLogger() {
+        return java.util.logging.Logger.getAnonymousLogger();
     }
 
     @Override

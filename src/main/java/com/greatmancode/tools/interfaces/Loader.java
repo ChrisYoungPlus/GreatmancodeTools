@@ -22,6 +22,7 @@ import com.greatmancode.tools.ServerType;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.EventManager;
 
+import java.util.logging.Logger;
 /**
  * A loader is called when the plugin is launched on the server.
  *
@@ -40,7 +41,8 @@ public interface Loader {
     ServerType getServerType();
 
     EventManager getEventManager();
-
+    
+    Logger getLogger();
     /**
      * Retrieve the common class. Usually you would cast it to the plugin version.
      *

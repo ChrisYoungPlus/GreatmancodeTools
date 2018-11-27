@@ -120,7 +120,7 @@ public class BukkitPlayerCaller extends PlayerCaller {
     
     @Override
     public List<String> getOnlinePlayers() {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         for (Player p : ((BukkitLoader) getCaller().getLoader()).getServer().getOnlinePlayers()) {
             list.add(p.getName());
         }
@@ -153,7 +153,7 @@ public class BukkitPlayerCaller extends PlayerCaller {
     public boolean isOP(UUID uuid) {
         return ((BukkitLoader) getCaller().getLoader()).getServer().getOfflinePlayer(uuid).isOp();
     }
-
+    @Deprecated
     @Override
     public UUID getUUID(String playerName) {
         OfflinePlayer offline = Bukkit.getOfflinePlayer(playerName);

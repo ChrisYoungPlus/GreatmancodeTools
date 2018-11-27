@@ -53,13 +53,7 @@ public class BukkitLoader extends JavaPlugin implements Loader {
                 getLogger().severe("The class " + mainClass + " is invalid!");
                 this.getServer().getPluginManager().disablePlugin(this);
             }
-        } catch (ClassNotFoundException e) {
-            getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
-            this.getServer().getPluginManager().disablePlugin(this);
-        } catch (InstantiationException e) {
-            getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
-            this.getServer().getPluginManager().disablePlugin(this);
-        } catch (IllegalAccessException e) {
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
             getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
             this.getServer().getPluginManager().disablePlugin(this);
         }
