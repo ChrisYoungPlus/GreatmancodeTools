@@ -26,7 +26,6 @@ import lombok.Getter;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.event.Listener;
-import org.spongepowered.api.event.game.state.GameAboutToStartServerEvent;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.event.game.state.GameStoppingServerEvent;
 import org.spongepowered.api.plugin.Plugin;
@@ -101,6 +100,11 @@ public class SpongeLoader implements Loader {
     @Override
     public EventManager getEventManager() {
         return eventManager;
+    }
+
+    @Override
+    public java.util.logging.Logger getLogger() {
+        return java.util.logging.Logger.getAnonymousLogger();
     }
 
     @Override
