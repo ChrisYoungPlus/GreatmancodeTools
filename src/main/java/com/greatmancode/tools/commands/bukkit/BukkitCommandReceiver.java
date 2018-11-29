@@ -22,6 +22,7 @@ import com.greatmancode.tools.commands.CommandHandler;
 import com.greatmancode.tools.commands.PlayerCommandSender;
 import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -53,11 +54,16 @@ public class BukkitCommandReceiver implements CommandReceiver, CommandExecutor {
             }
             com.greatmancode.tools.commands.CommandSender sender = null;
             if (commandSender instanceof ConsoleCommandSender){
-                sender = new com.greatmancode.tools.commands.ConsoleCommandSender();
+                sender = new com.greatmancode.tools.commands.ConsoleCommandSender(commandSender.getName());
             }else if(commandSender instanceof Player){
-                sender = new PlayerCommandSender(commandSender.getName(),((Player)commandSender).getUniqueId());
+                Player  player = (Player) commandSender;
+                sender = new PlayerCommandSender(player.getName(),player.getUniqueId());
             }
-            subCommand.execute(subCommandValue, sender, newArgs);
+            if(sender != null)subCommand.execute(subCommandValue, sender, newArgs);
+                    else {
+                        commandHandler.getServerCaller().getLoader().getLogger().warning("Null Sender in command :" + subCommand.getName());
+                        return false;}
+                    
             return true;
         }
         return false;

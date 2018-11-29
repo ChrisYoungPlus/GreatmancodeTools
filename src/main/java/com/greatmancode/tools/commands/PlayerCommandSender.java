@@ -20,6 +20,7 @@
 package com.greatmancode.tools.commands;
 
 import lombok.Data;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.UUID;
@@ -32,7 +33,10 @@ import java.util.UUID;
 @Data
 @RequiredArgsConstructor
 public class PlayerCommandSender implements CommandSender {
+    
+    @NonNull
     private final String name;
+    @NonNull
     private final UUID uuid;
 
     @Override
