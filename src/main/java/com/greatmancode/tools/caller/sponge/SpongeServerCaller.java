@@ -206,7 +206,7 @@ public class SpongeServerCaller extends ServerCaller {
                 }
                 CommandSender sender = null;
                 if (source instanceof ConsoleSource) {
-                    sender = new ConsoleCommandSender();
+                    sender = new ConsoleCommandSender(source.getName());
                 }else if(source instanceof Player){
                     sender = new PlayerCommandSender(((Player) source).getDisplayName(),((Player) source).getUuid());
                 }
