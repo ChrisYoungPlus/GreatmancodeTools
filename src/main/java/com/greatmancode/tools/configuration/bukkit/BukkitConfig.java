@@ -27,9 +27,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * This class handles YAML files with the Bukkit imports.
@@ -48,28 +46,28 @@ public class BukkitConfig extends Config {
     }
 
     @Override
-    public int getInt(String path) {
-        return configFile.getInt(path);
+    public int getInt(String path,int def) {
+        return configFile.getInt(path,def);
     }
 
     @Override
-    public long getLong(String path) {
-        return configFile.getLong(path);
+    public long getLong(String path,long def) {
+        return configFile.getLong(path,def);
     }
 
     @Override
-    public double getDouble(String path) {
-        return configFile.getDouble(path);
+    public double getDouble(String path, double def) {
+        return configFile.getDouble(path,def);
     }
 
     @Override
-    public String getString(String path) {
-        return configFile.getString(path);
+    public String getString(String path, String def) {
+        return configFile.getString(path,def);
     }
 
     @Override
-    public boolean getBoolean(String path) {
-        return configFile.getBoolean(path);
+    public boolean getBoolean(String path, boolean def) {
+        return configFile.getBoolean(path,def);
     }
 
     @Override
@@ -88,19 +86,36 @@ public class BukkitConfig extends Config {
     }
 
     @Override
-    public Map<String, String> getStringMap(String path) {
+    public Map<String, String> getStringMap(String path,Map<String, String> def) {
         Map<String, String> values = new HashMap<>();
         ConfigurationSection configurationSection = configFile.getConfigurationSection(path);
         if (configurationSection != null) {
             for (Map.Entry<String, Object> entry : configurationSection.getValues(false).entrySet()) {
                 values.put(entry.getKey(), (String) entry.getValue());
             }
+            return values;
+        }else{
+            return def;
         }
-        return values;
     }
 
     @Override
-    public List<String> getStringList(String path) {
-        return configFile.getStringList(path);
+    public List<String> getStringList(String path, List<String> def) {
+        List<?> list = configFile.getList(path);
+        if (list == null) {
+            return def;
+        }
+        List<String> result = new ArrayList<>();
+    
+        for (Object object : list) {
+            if ((object instanceof String) || (isPrimitiveWrapper(object))) {
+                result.add(String.valueOf(object));
+            }
+        }
+        return result;
+    }
+    
+    protected boolean isPrimitiveWrapper(Object input) {
+        return input instanceof Integer || input instanceof Boolean || input instanceof Character || input instanceof Byte || input instanceof Short || input instanceof Double || input instanceof Long || input instanceof Float;
     }
 }

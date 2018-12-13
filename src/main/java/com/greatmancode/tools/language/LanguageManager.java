@@ -44,11 +44,11 @@ public class LanguageManager {
 
     private void loadLanguage() {
         try {
-            languageList = languageFile.getStringMap("");
+            languageList = languageFile.getStringMap("",new HashMap<>());
         } catch (ClassCastException e) {
             new File(path, fileName).delete();
             languageFile = new ConfigurationManager(serverCaller).loadFile(path, fileName);
-            languageList = languageFile.getStringMap("");
+            languageList = languageFile.getStringMap("",null);
         }
 
     }

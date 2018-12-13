@@ -19,4 +19,6 @@
 package com.greatmancode.tools.commands.interfaces;
 
 public interface Command {
+    
+    String getName();
 }

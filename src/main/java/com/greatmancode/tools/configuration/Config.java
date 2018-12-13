@@ -48,6 +48,7 @@ public abstract class Config {
         this.re = null;
         file = new File(folder, fileName);
     }
+    
 
     /**
      * Retrieve a integer from the configuration
@@ -55,7 +56,7 @@ public abstract class Config {
      * @param path The path to the integer we want to retrieve
      * @return A integer
      */
-    public abstract int getInt(String path);
+    public abstract int getInt(String path, int def);
 
     /**
      * Retrieve a long from the configuration
@@ -63,7 +64,7 @@ public abstract class Config {
      * @param path The path to the long we want to retrieve
      * @return A Long
      */
-    public abstract long getLong(String path);
+    public abstract long getLong(String path,long def);
 
     /**
      * Retrieve a double from the configuration
@@ -71,7 +72,7 @@ public abstract class Config {
      * @param path The path to the double we want to retrieve
      * @return A double
      */
-    public abstract double getDouble(String path);
+    public abstract double getDouble(String path, double def);
 
     /**
      * Retrieve a String from the configuration
@@ -79,7 +80,7 @@ public abstract class Config {
      * @param path The path to the String we want to retrieve
      * @return A String
      */
-    public abstract String getString(String path);
+    public abstract String getString(String path, String def);
 
     /**
      * Retrieve a Boolean from the configuration
@@ -87,7 +88,7 @@ public abstract class Config {
      * @param path The path to the Boolean we want to retrieve
      * @return A Boolean
      */
-    public abstract boolean getBoolean(String path);
+    public abstract boolean getBoolean(String path, boolean def);
 
     /**
      * Set a value in the configuration.
@@ -105,7 +106,7 @@ public abstract class Config {
      */
     public abstract boolean has(String path);
 
-    public abstract Map<String, String> getStringMap(String path);
+    public abstract Map<String, String> getStringMap(String path, Map<String,String> def);
 
-    public abstract List<String> getStringList(String path);
+    public abstract List<String> getStringList(String path, List<String> def);
 }

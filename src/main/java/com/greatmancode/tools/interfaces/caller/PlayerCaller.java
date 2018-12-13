@@ -52,6 +52,16 @@ public abstract class PlayerCaller {
      */
     
     public abstract boolean checkPermission(UUID uuid, String perm);
+    
+    /**
+     * Sends a message to a player
+     * @param commandName the command that started the mes
+     * @param playerName The player name to send the message
+     * @param message    The message to send
+     */
+    
+    
+    public abstract void sendMessage(String playerName, String message, String commandName);
     /**
      * Sends a message to a player
      *
@@ -60,6 +70,17 @@ public abstract class PlayerCaller {
      */
     @Deprecated
     public abstract void sendMessage(String playerName, String message);
+    
+    /**
+     * Sends a message to a player
+     * @param commandName the command that started the mes
+     * @param uuid The player name to send the message
+     * @param message    The message to send
+     */
+    
+    
+    public abstract void sendMessage(UUID uuid, String message, String commandName);
+    
     /**
      * Sends a message to a player
      *

@@ -22,16 +22,16 @@ import com.greatmancode.tools.commands.CommandHandler;
 import com.greatmancode.tools.commands.PlayerCommandSender;
 import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
-import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 
-public class BukkitCommandReceiver implements CommandReceiver, CommandExecutor {
-    private CommandHandler commandHandler;
+import java.util.WeakHashMap;
 
+
+public class BukkitCommandReceiver implements CommandReceiver<ConsoleCommandSender>, CommandExecutor {
+    private CommandHandler commandHandler;
+    
+    private WeakHashMap<String , ConsoleCommandSender> senders = new WeakHashMap<>();
     public BukkitCommandReceiver(CommandHandler commandHandler) {
         this.commandHandler = commandHandler;
     }
@@ -59,13 +59,34 @@ public class BukkitCommandReceiver implements CommandReceiver, CommandExecutor {
                 Player  player = (Player) commandSender;
                 sender = new PlayerCommandSender(player.getName(),player.getUniqueId());
             }
-            if(sender != null)subCommand.execute(subCommandValue, sender, newArgs);
-                    else {
-                        commandHandler.getServerCaller().getLoader().getLogger().warning("Null Sender in command :" + subCommand.getName());
-                        return false;}
-                    
-            return true;
+            
+            if(sender != null) {
+                if(sender instanceof com.greatmancode.tools.commands.ConsoleCommandSender){
+                    commandSender.sendMessage("Triggering command: "+command.getName() +" with "
+                            +subCommandValue +" args: "+ ((newArgs.length > 0)?newArgs:"null") );
+                    senders.put(subCommandValue, (ConsoleCommandSender) commandSender);
+                }
+                subCommand.execute(subCommandValue, sender, newArgs);
+                return true;
+            } else {
+                try{
+                    throw  new CommandException("Null Sender in command :" + subCommand.getName());
+                }catch (CommandException e){
+                    e.printStackTrace();
+                }
+                return false;
+            }
         }
-        return false;
+        try{
+            throw  new CommandException("Sub Command was null :" + command.getName());
+        }catch (CommandException e){
+            e.printStackTrace();
+        }        return false;
     }
+    
+    @Override
+    public ConsoleCommandSender getConsoleSender(String commandName) {
+        ConsoleCommandSender sender = senders.get(commandName);
+        senders.remove(commandName);
+        return sender;    }
 }

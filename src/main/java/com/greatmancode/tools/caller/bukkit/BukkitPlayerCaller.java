@@ -18,11 +18,13 @@
  */
 package com.greatmancode.tools.caller.bukkit;
 
+import com.greatmancode.tools.commands.bukkit.BukkitCommandReceiver;
 import com.greatmancode.tools.interfaces.BukkitLoader;
 import com.greatmancode.tools.interfaces.caller.PlayerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -75,6 +77,18 @@ public class BukkitPlayerCaller extends PlayerCaller {
     
     @Deprecated
     @Override
+    public void sendMessage(String playerName, String message, String commandName) {
+        if(commandName ==  null){
+            sendMessage(playerName,message);
+        }else{
+            if(playerName == null) {
+                sendConsoleMessage(message,commandName);
+            }
+        }
+    }
+    
+    @Deprecated
+    @Override
     public void sendMessage(String playerName, String message) {
         Player p = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayerExact(playerName);
         if (p != null) {
@@ -83,7 +97,28 @@ public class BukkitPlayerCaller extends PlayerCaller {
             ((BukkitLoader) getCaller().getLoader()).getServer().getConsoleSender().sendMessage(getCaller().addColor(getCaller().getCommandPrefix() + message));
         }
     }
-
+    
+    private void sendConsoleMessage(String message, String commandName) {
+        ConsoleCommandSender sender = ((BukkitCommandReceiver) getCaller().getLoader().getCommandReceiver()).getConsoleSender(commandName);
+        if(sender == null){
+            ((BukkitLoader) getCaller().getLoader()).getServer().getConsoleSender().sendMessage(getCaller().addColor(getCaller().getCommandPrefix() + message));
+        }else {
+            sender.sendMessage(getCaller().addColor(getCaller().getCommandPrefix() + message));
+        }
+    }
+    
+    
+    @Override
+    public void sendMessage(UUID uuid, String message, String commandName) {
+            if(commandName ==  null){
+                sendMessage(uuid,message);
+            }else{
+                if(uuid == null) {
+                    sendConsoleMessage(message,commandName);
+                }
+            }
+    }
+    
     @Override
     public void sendMessage(UUID uuid, String message) {
         Player p = getBukkitPlayer(uuid);

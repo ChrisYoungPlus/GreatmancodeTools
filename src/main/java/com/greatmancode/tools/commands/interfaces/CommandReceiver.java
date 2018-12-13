@@ -18,5 +18,7 @@
  */
 package com.greatmancode.tools.commands.interfaces;
 
-public interface CommandReceiver {
+public interface CommandReceiver<T> {
+    
+    T getConsoleSender(String commandName);
 }

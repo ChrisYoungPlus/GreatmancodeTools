@@ -38,15 +38,15 @@ public class ConfigurationTest {
 		ConfigurationManager configurationManager = new ConfigurationManager(new UnitTestServerCaller(new UnitTestLoader()));
 		Config config = configurationManager.loadFile(new File(ConfigurationTest.class.getProtectionDomain().getCodeSource().getLocation().toURI()), "testConfig.yml");
 		config.setValue("test", 1);
-		assertEquals(1, config.getInt("test"));
+		assertEquals(1, config.getInt("test",0));
 		config.setValue("test", "test3");
-		assertEquals("test3", config.getString("test"));
-		assertNull(config.getString("test3"));
+		assertEquals("test3", config.getString("test",""));
+		assertNull(config.getString("test3",null));
 		config.setValue("test", 0.3);
-		assertEquals(0.3, config.getDouble("test"), 0);
+		assertEquals(0.3, config.getDouble("test",0), 0);
 		config.setValue("test", true);
-		assertTrue(config.getBoolean("test"));
+		assertTrue(config.getBoolean("test",false));
 		config.setValue("test", 3L);
-		assertEquals(3L, config.getLong("test"));
+		assertEquals(3L, config.getLong("test",2L));
 	}
 }

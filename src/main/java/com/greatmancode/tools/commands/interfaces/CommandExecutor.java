@@ -19,8 +19,15 @@
 package com.greatmancode.tools.commands.interfaces;
 
 import com.greatmancode.tools.commands.CommandSender;
+import lombok.Getter;
 
 public abstract class CommandExecutor implements Command {
+    
+    @Getter
+    private final String name;
+    
+    protected CommandExecutor(String name) {this.name = name;}
+    
     /**
      * The execution of the command
      *

@@ -50,33 +50,52 @@ public class SpongeConfig extends Config {
             e.printStackTrace();
         }
     }
-
+    
     @Override
+    public int getInt(String path, int def) {
+        return getInt(path);
+    }
+    
+    @Override
+    public long getLong(String path, long def) {
+        return getLong(path);
+    }
+    
+    @Override
+    public double getDouble(String path, double def) {
+        return getDouble(path);
+    }
+    
+    @Override
+    public String getString(String path, String def) {
+        return getString(path);
+    }
+    
+    @Override
+    public boolean getBoolean(String path, boolean def) {
+        return getBoolean(path);
+    }
+    
     public int getInt(String path) {
         return file.getNode(path).getInt();
     }
 
-    @Override
     public long getLong(String path) {
         return file.getNode(path).getLong();
     }
 
-    @Override
     public double getDouble(String path) {
         return file.getNode(path).getDouble();
     }
 
-    @Override
     public String getString(String path) {
         return file.getNode(path).getString();
     }
 
-    @Override
     public boolean getBoolean(String path) {
         return file.getNode(path).getBoolean();
     }
 
-    @Override
     public void setValue(String path, Object value) {
         file.getNode(path).setValue(value);
         try {
@@ -90,8 +109,17 @@ public class SpongeConfig extends Config {
     public boolean has(String path) {
         return !file.getNode(path).isVirtual();
     }
-
+    
     @Override
+    public Map<String, String> getStringMap(String path, Map<String, String> def) {
+        return null;
+    }
+    
+    @Override
+    public List<String> getStringList(String path, List<String> def) {
+        return null;
+    }
+    
     public Map<String, String> getStringMap(String path) {
         Map<String, String> map = new HashMap<>();
         Set<? extends Map.Entry<Object, ? extends CommentedConfigurationNode>> childrens = path.equals("") ? file.getChildrenMap().entrySet(): file.getNode(path).getChildrenMap().entrySet();
@@ -101,7 +129,6 @@ public class SpongeConfig extends Config {
         return map;
     }
 
-    @Override
     public List<String> getStringList(String path) {
         return null;
     }
