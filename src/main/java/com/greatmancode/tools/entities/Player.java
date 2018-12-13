@@ -18,6 +18,7 @@
  */
 package com.greatmancode.tools.entities;
 
+import com.greatmancode.tools.commands.CommandSender;
 import com.greatmancode.tools.commands.PlayerCommandSender;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,13 +27,13 @@ import java.util.UUID;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Player extends PlayerCommandSender {
+public class Player extends PlayerCommandSender<CommandSender> {
 
     private final String displayName;
     private final String worldName;
 
-    public Player(String name, String displayName, String worldName, UUID uuid){
-        super(name,uuid);
+    public Player(String name, String displayName, String worldName, UUID uuid, CommandSender sender){
+        super(name,uuid,sender);
         this.displayName = displayName;
         this.worldName = worldName;
     }

@@ -20,8 +20,9 @@ package com.greatmancode.tools.commands;
 
 import java.util.UUID;
 
-public interface CommandSender {
+public interface CommandSender<T> {
 
-    public String getName();
-    public UUID getUuid();
+     String getName();
+     UUID getUuid();
+     T getServerSender();
 }

@@ -43,7 +43,7 @@ public class BukkitLoader extends JavaPlugin implements Loader {
         eventManager = new EventManager(bukkitCaller);
         InputStreamReader readerLoader = new InputStreamReader(this.getClass().getResourceAsStream("/loader.yml"));
         BukkitConfig bukkitConfig = new BukkitConfig(readerLoader, bukkitCaller);
-        String mainClass = bukkitConfig.getString("main-class");
+        String mainClass = bukkitConfig.getString("main-class","");
         try {
             Class<?> clazz = Class.forName(mainClass);
             if (Common.class.isAssignableFrom(clazz)) {

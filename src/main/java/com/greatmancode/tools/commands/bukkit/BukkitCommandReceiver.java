@@ -25,13 +25,10 @@ import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 
-import java.util.WeakHashMap;
 
-
-public class BukkitCommandReceiver implements CommandReceiver<ConsoleCommandSender>, CommandExecutor {
+public class BukkitCommandReceiver implements CommandReceiver, CommandExecutor {
     private CommandHandler commandHandler;
     
-    private WeakHashMap<String , ConsoleCommandSender> senders = new WeakHashMap<>();
     public BukkitCommandReceiver(CommandHandler commandHandler) {
         this.commandHandler = commandHandler;
     }
@@ -54,18 +51,13 @@ public class BukkitCommandReceiver implements CommandReceiver<ConsoleCommandSend
             }
             com.greatmancode.tools.commands.CommandSender sender = null;
             if (commandSender instanceof ConsoleCommandSender){
-                sender = new com.greatmancode.tools.commands.ConsoleCommandSender(commandSender.getName());
+                sender = new com.greatmancode.tools.commands.ConsoleCommandSender<>(commandSender.getName(),commandSender);
             }else if(commandSender instanceof Player){
                 Player  player = (Player) commandSender;
-                sender = new PlayerCommandSender(player.getName(),player.getUniqueId());
+                sender = new PlayerCommandSender<>(player.getName(),player.getUniqueId(),player);
             }
             
             if(sender != null) {
-                if(sender instanceof com.greatmancode.tools.commands.ConsoleCommandSender){
-                    commandSender.sendMessage("Triggering command: "+command.getName() +" with "
-                            +subCommandValue +" args: "+ ((newArgs.length > 0)?newArgs:"null") );
-                    senders.put(subCommandValue, (ConsoleCommandSender) commandSender);
-                }
                 subCommand.execute(subCommandValue, sender, newArgs);
                 return true;
             } else {
@@ -83,10 +75,6 @@ public class BukkitCommandReceiver implements CommandReceiver<ConsoleCommandSend
             e.printStackTrace();
         }        return false;
     }
-    
-    @Override
-    public ConsoleCommandSender getConsoleSender(String commandName) {
-        ConsoleCommandSender sender = senders.get(commandName);
-        senders.remove(commandName);
-        return sender;    }
+
+
 }

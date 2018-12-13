@@ -32,15 +32,21 @@ import java.util.UUID;
 
 @Data
 @RequiredArgsConstructor
-public class PlayerCommandSender implements CommandSender {
+public class PlayerCommandSender<T> implements CommandSender<T> {
     
     @NonNull
     private final String name;
     @NonNull
     private final UUID uuid;
-
+    @NonNull
+    private T sender;
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public T getServerSender() {
+        return sender;
     }
 }

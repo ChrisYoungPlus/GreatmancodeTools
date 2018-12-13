@@ -26,14 +26,20 @@ import java.util.UUID;
 
 @Data
 @RequiredArgsConstructor
-public class ConsoleCommandSender implements CommandSender {
+public class ConsoleCommandSender<T> implements CommandSender<T> {
     
     @NonNull
     private final String name;
-    
     private final UUID uuid = null;
+    @NonNull
+    private T sender;
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public T getServerSender() {
+        return sender;
     }
 }

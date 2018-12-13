@@ -18,6 +18,7 @@
  */
 package com.greatmancode.tools.interfaces.caller;
 
+import com.greatmancode.tools.commands.CommandSender;
 import com.greatmancode.tools.entities.Player;
 
 import java.util.List;
@@ -70,15 +71,21 @@ public abstract class PlayerCaller {
      */
     @Deprecated
     public abstract void sendMessage(String playerName, String message);
-    
+
+    /**
+     * Sends a message to a sender
+     * @param sender the sender
+     * @param message the message
+     * @param command the initial command
+     */
+    public abstract void sendMessage(CommandSender sender, String message, String command);
+
     /**
      * Sends a message to a player
      * @param commandName the command that started the mes
      * @param uuid The player name to send the message
      * @param message    The message to send
      */
-    
-    
     public abstract void sendMessage(UUID uuid, String message, String commandName);
     
     /**

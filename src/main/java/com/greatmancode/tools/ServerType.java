@@ -20,6 +20,5 @@ package com.greatmancode.tools;
 
 public enum ServerType {
     BUKKIT,
-    UNIT_TEST,
-    SPONGE
+    UNIT_TEST
 }

@@ -18,6 +18,7 @@
  */
 package com.greatmancode.tools.caller.unittest;
 
+import com.greatmancode.tools.commands.CommandSender;
 import com.greatmancode.tools.entities.Player;
 import com.greatmancode.tools.interfaces.caller.PlayerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
@@ -28,6 +29,7 @@ import java.util.UUID;
 
 public class UnitTestPlayerCaller extends PlayerCaller {
     private UUID playeruuid = UUID.fromString("00000000-0000-0000-0000-000000000000");
+    private UnitTestCommandSender sender = new UnitTestCommandSender("UnitTestPlayer",playeruuid);
     public UnitTestPlayerCaller(ServerCaller caller) {
         super(caller);
     }
@@ -49,8 +51,24 @@ public class UnitTestPlayerCaller extends PlayerCaller {
     }
 
     @Override
+    public void sendMessage(String playerName, String message, String commandName) {
+        caller.getLogger().info(playerName + ":" + message + " from " + commandName);
+
+    }
+
+    @Override
     public void sendMessage(String playerName, String message) {
         caller.getLogger().info(playerName + ":" + message);
+    }
+
+    @Override
+    public void sendMessage(CommandSender sender, String message, String command) {
+        caller.getLogger().info(sender.toString() + ":" + message + " from " + command);
+    }
+
+    @Override
+    public void sendMessage(UUID uuid, String message, String commandName) {
+        caller.getLogger().info(uuid.toString() + ":" + message + " from " + commandName);
     }
 
     @Override
@@ -101,17 +119,17 @@ public class UnitTestPlayerCaller extends PlayerCaller {
 
     @Override
     public Player getPlayer(UUID uuid) {
-        return new Player("UnitTestPlayer","UnitTestPlayer","UnitTestWorld",playeruuid);
+        return new Player("UnitTestPlayer","UnitTestPlayer","UnitTestWorld",playeruuid,sender);
     }
     
     @Override
     public Player getOnlinePlayer(String name) {
-        return new Player("UnitTestPlayer","UnitTestPlayer","UnitTestWorld",playeruuid);
+        return new Player("UnitTestPlayer","UnitTestPlayer","UnitTestWorld",playeruuid,sender);
     }
     
     @Override
     public Player getOnlinePlayer(UUID uuid) {
-        return new Player("UnitTestPlayer","UnitTestPlayer","UnitTestWorld",playeruuid);
+        return new Player("UnitTestPlayer","UnitTestPlayer","UnitTestWorld",playeruuid,sender);
     }
     
     @Override
