@@ -18,30 +18,28 @@
  */
 package com.greatmancode.tools.events.bukkit;
 
-import com.greatmancode.tools.commands.PlayerCommandSender;
+import com.greatmancode.tools.caller.bukkit.BukkitPlayerCaller;
 import com.greatmancode.tools.entities.Player;
 import com.greatmancode.tools.events.EventManager;
 
-import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerJoinEventListener implements Listener {
+
+    private BukkitPlayerCaller caller;
+
+    public PlayerJoinEventListener(BukkitPlayerCaller caller) {
+        this.caller = caller;
+    }
+
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
         org.bukkit.entity.Player player = event.getPlayer();
         com.greatmancode.tools.events.playerEvent.PlayerJoinEvent pEvent = new com.greatmancode.tools.events
-                .playerEvent.PlayerJoinEvent(
-                        new Player(
-                                player.getName(),
-                                player.getDisplayName(),
-                                player.getWorld().getName(),
-                                player.getUniqueId(),
-                                new PlayerCommandSender<CommandSender>(player.getDisplayName(),player.getUniqueId(),player)
-                        )
-        );
+                .playerEvent.PlayerJoinEvent(Player.getPlayer(caller,player.getUniqueId()));
         EventManager.getInstance().callEvent(pEvent);
     }
 }

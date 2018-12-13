@@ -20,6 +20,8 @@ package com.greatmancode.tools.entities;
 
 import com.greatmancode.tools.commands.CommandSender;
 import com.greatmancode.tools.commands.PlayerCommandSender;
+import com.greatmancode.tools.interfaces.caller.PlayerCaller;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -31,11 +33,20 @@ public class Player extends PlayerCommandSender<CommandSender> {
 
     private final String displayName;
     private final String worldName;
+    public Player(String name, String displayName, String worldName, UUID uuid){
+        super(name,uuid,null);
+        this.displayName = displayName;
+        this.worldName = worldName;
+    }
 
     public Player(String name, String displayName, String worldName, UUID uuid, CommandSender sender){
         super(name,uuid,sender);
         this.displayName = displayName;
         this.worldName = worldName;
+    }
+
+    public static Player getPlayer(PlayerCaller caller,UUID uuid){
+        return caller.getPlayer(uuid);
     }
 
 }

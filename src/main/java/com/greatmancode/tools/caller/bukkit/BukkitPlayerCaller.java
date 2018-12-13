@@ -97,7 +97,7 @@ public class BukkitPlayerCaller extends PlayerCaller {
 
     @Override
     public void sendMessage(CommandSender sender, String message,String command) {
-        if(sender.getServerSender() instanceof org.bukkit.command.CommandSender) {
+        if(sender.getServerSender() != null && sender.getServerSender() instanceof org.bukkit.command.CommandSender) {
             ((org.bukkit.command.CommandSender) sender.getServerSender()).sendMessage(getCaller().addColor(getCaller().getCommandPrefix() + message));
         }else {
             sendMessage(sender.getUuid(),message);

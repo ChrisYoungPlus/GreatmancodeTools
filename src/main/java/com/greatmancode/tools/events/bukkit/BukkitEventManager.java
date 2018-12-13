@@ -18,6 +18,7 @@
  */
 package com.greatmancode.tools.events.bukkit;
 
+import com.greatmancode.tools.caller.bukkit.BukkitPlayerCaller;
 import com.greatmancode.tools.events.interfaces.ServerEventManager;
 import com.greatmancode.tools.events.playerEvent.PlayerJoinEvent;
 import com.greatmancode.tools.events.playerEvent.PreJoinEvent;
@@ -32,8 +33,8 @@ import java.util.Map;
 public class BukkitEventManager implements ServerEventManager {
     private Map<String, Listener> map = new HashMap<>();
 
-    public BukkitEventManager() {
-        map.put(PlayerJoinEvent.class.getName(), new PlayerJoinEventListener());
+    public BukkitEventManager(BukkitPlayerCaller caller) {
+        map.put(PlayerJoinEvent.class.getName(), new PlayerJoinEventListener(caller));
         map.put(PreJoinEvent.class.getName(), new PreJoinEventListener());
     }
 

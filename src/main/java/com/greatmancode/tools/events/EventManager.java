@@ -18,6 +18,7 @@
  */
 package com.greatmancode.tools.events;
 
+import com.greatmancode.tools.caller.bukkit.BukkitPlayerCaller;
 import com.greatmancode.tools.caller.bukkit.BukkitServerCaller;
 import com.greatmancode.tools.caller.unittest.UnitTestServerCaller;
 import com.greatmancode.tools.events.bukkit.BukkitEventManager;
@@ -43,7 +44,7 @@ public class EventManager {
         this.serverCaller = serverCaller;
 
         if (serverCaller instanceof BukkitServerCaller) {
-            eventManager = new BukkitEventManager();
+            eventManager = new BukkitEventManager((BukkitPlayerCaller) serverCaller.getPlayerCaller());
         } else if (serverCaller instanceof UnitTestServerCaller) {
             eventManager = new UnitTestEventManager();
         }

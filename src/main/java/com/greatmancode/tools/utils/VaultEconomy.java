@@ -37,7 +37,8 @@ public abstract class VaultEconomy implements Economy {
 
     @Override
     public boolean hasAccount(OfflinePlayer offlinePlayer) {
-        return hasAccount(new Player(offlinePlayer.getName(), null, null, offlinePlayer.getUniqueId()));
+
+        return hasAccount(new Player(offlinePlayer.getName(), null, null, offlinePlayer.getUniqueId(),null));
     }
 
     @Deprecated
@@ -97,7 +98,7 @@ public abstract class VaultEconomy implements Economy {
 
     @Override
     public boolean has(OfflinePlayer offlinePlayer, String world, double amount) {
-        return has(new Player(offlinePlayer.getName(), null, null, offlinePlayer.getUniqueId()), world, amount);
+        return has(new Player(offlinePlayer.getName(), null, null, offlinePlayer.getUniqueId(),null), world, amount);
     }
 
     public abstract boolean has(Player player, String world, double amount);
@@ -121,7 +122,7 @@ public abstract class VaultEconomy implements Economy {
 
     @Override
     public EconomyResponse withdrawPlayer(OfflinePlayer offlinePlayer, String world, double amount) {
-        return withdrawPlayer(new Player(offlinePlayer.getName(), null, null, offlinePlayer.getUniqueId()), world, amount);
+        return withdrawPlayer(new Player(offlinePlayer.getName(), null, null, offlinePlayer.getUniqueId(),null), world, amount);
     }
 
     public abstract EconomyResponse withdrawPlayer(Player p, String world, double amount);
