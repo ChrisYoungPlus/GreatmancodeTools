@@ -5,7 +5,7 @@
 
 	<groupId>com.greatmancode</groupId>
 	<artifactId>tools</artifactId>
-	<version>1.4.1-SNAPSHOT</version>
+	<version>1.4.2-SNAPSHOT</version>
 	<name>GreatmancodeTools</name>
 	<inceptionYear>2013</inceptionYear>
 	<url>https://github.com/greatman/GreatmancodeTools</url>
@@ -130,7 +130,8 @@
 		<dependency>
 			<groupId>au.com.addstar.dripreporter</groupId>
 			<artifactId>DripReporterAPI</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.0.2-SNAPSHOT</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 	<build>
