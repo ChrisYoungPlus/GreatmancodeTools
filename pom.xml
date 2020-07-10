@@ -1,6 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.greatmancode</groupId>
@@ -20,12 +19,12 @@
 	<!-- Organization -->
 	<organization>
 		<name>Greatman</name>
-		<url>http://github.com/greatman</url>
+		<url>https://github.com/greatman</url>
 	</organization>
 	<!-- Continuous integration -->
 	<ciManagement>
 		<system>jenkins</system>
-		<url>http://jenkins.addstarmc.com</url>
+		<url>https://jenkins.addstarmc.com</url>
 	</ciManagement>
 	<properties>
 		<build.number />
@@ -35,12 +34,12 @@
 		<repository>
 			<id>addstarmc-release</id>
 			<name>maven.addstar.com.au-releases</name>
-			<url>http://maven.addstar.com.au/artifactory/ext-release-local</url>
+			<url>https://maven.addstar.com.au/artifactory/all</url>
 		</repository>
 		<snapshotRepository>
 			<id>addstarmc-snapshot</id>
 			<name>maven.addstar.com.au-snapshots</name>
-			<url>http://maven.addstar.com.au/artifactory/ext-snapshot-local</url>
+			<url>https://maven.addstar.com.au/artifactory/all</url>
 		</snapshotRepository>
 	</distributionManagement>
 	<repositories>
@@ -49,15 +48,19 @@
 			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
 		</repository>
 		<repository>
+			<id>maven-repo</id>
+			<url>https://repo.maven.apache.org/maven2</url>
+		</repository>
+		<repository>
 			<id>addstar-repo</id>
-			<url>http://maven.addstar.com.au/artifactory/ext-release-local</url>
+			<url>https://maven.addstar.com.au/artifactory/all</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
 		<repository>
 			<id>addstar-snapshot-repo</id>
-			<url>http://maven.addstar.com.au/artifactory/ext-snapshot-local</url>
+			<url>https://maven.addstar.com.au/artifactory/all-snapshot</url>
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
@@ -80,7 +83,7 @@
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot-api</artifactId>
-			<version>1.13.2-R0.1-SNAPSHOT</version>
+			<version>1.16.1-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
